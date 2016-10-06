@@ -1,0 +1,314 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=EasInhouseSystem
+Author=ThanhTT
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=system
+PageInfo="system",7,"A4Landscape",$FFFFFF
+Page=company
+PageInfo="company",7,"A4Landscape",$FFFFFF
+Page=workhour
+PageInfo="workhour",7,"A4Landscape",$FFFFFF
+Domain==
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=7
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=6
+RDBMSTypeName=PostgreSQL
+CommonField="DB record status","data_status","@INT",,,"1","1: new, 2: update, 9: delete",$FFFFFFFF
+CommonField="Create time","created_at","timestamp",,,"","",$FFFFFFFF
+CommonField="Create user","created_by","text",,,"","",$FFFFFFFF
+CommonField="Update time","update_at","timestamp",,,"","",$FFFFFFFF
+CommonField="Update user","update_by","text",,,"","",$FFFFFFFF
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Relation]
+Entity1=company_employee
+Entity2=workhour_time_record
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=employee_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,5877,4123,5507,R,R
+Position="WORKHOUR",0,5877,4123,5507,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006132607
+LineMode=0
+Bar1=588
+Bar2=412
+Bar3=551
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=workhour_project_task
+Entity2=workhour_time_record
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=project_task_id
+Cardinarity1=
+Cardinarity2=
+Position="WORKHOUR",0,2528,8167,3203,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006132531
+LineMode=0
+Bar1=253
+Bar2=817
+Bar3=320
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=company_project
+Entity2=workhour_project_task
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=project_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,3203,6797,1375,R,R
+Position="WORKHOUR",0,3203,6797,8404,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006132514
+LineMode=0
+Bar1=320
+Bar2=680
+Bar3=138
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=workhour_task
+Entity2=workhour_project_task
+RelationType1=2
+RelationType2=1
+Fields1=id
+Fields2=task_id
+Cardinarity1=
+Cardinarity2=
+Position="WORKHOUR",0,3403,6597,3419,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006132455
+LineMode=0
+Bar1=340
+Bar2=660
+Bar3=342
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=workhour_project_task
+LName=Project Task
+Comment=
+TableOption=
+Page=WORKHOUR
+Left=550
+Top=400
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Project","project_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Task","task_id","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006132445
+Position="WORKHOUR",550,400
+
+[Entity]
+PName=workhour_time_record
+LName=Time record
+Comment=
+TableOption=
+Page=WORKHOUR
+Left=1050
+Top=200
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Project Task","project_task_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Working time","working_time","@FLOAT",,,"","",$FFFFFFFF,""
+Field="Working date","working_date","@DATE","NOT NULL",,"","",$FFFFFFFF,""
+Field="Employee","employee_id","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006133423
+Position="WORKHOUR",1050,200
+
+[Entity]
+PName=workhour_task
+LName=Task
+Comment=
+TableOption=
+Page=WORKHOUR
+Left=550
+Top=200
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Display order","display_order","@INT",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006131808
+Position="WORKHOUR",550,200
+
+[Entity]
+PName=system_user_login
+LName=User Login
+Comment=
+TableOption=
+Page=SYSTEM
+Left=550
+Top=200
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Account","account","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Password encryption","password_encryption","text",,,"","",$FFFFFFFF,""
+Field="Access token","access_token","text",,,"","",$FFFFFFFF,""
+Field="Auth key","auth_key","text",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006134018
+Position="SYSTEM",550,200
+
+[Relation]
+Entity1=company_division
+Entity2=company_employee
+RelationType1=1
+RelationType2=3
+Fields1=id
+Fields2=division_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,3218,7163,5820,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006131436
+LineMode=0
+Bar1=322
+Bar2=716
+Bar3=582
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=company_division
+LName=Company Division
+Comment=
+TableOption=
+Page=COMPANY
+Left=500
+Top=350
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006131420
+Position="COMPANY",500,350
+
+[Entity]
+PName=company_employee
+LName=Employee
+Comment=
+TableOption=
+Page=COMPANY
+Left=1000
+Top=350
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Division","division_id","text",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006131325
+Position="COMPANY",1000,350
+
+[Relation]
+Entity1=company_customer
+Entity2=company_project
+RelationType1=1
+RelationType2=3
+Fields1=id
+Fields2=customer_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,1163,8837,1172,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161006130752
+LineMode=0
+Bar1=116
+Bar2=884
+Bar3=117
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=company_project
+LName=Project
+Comment=
+TableOption=
+Page=COMPANY
+Left=1000
+Top=150
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Customer","customer_id","text",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006131007
+Position="COMPANY",1000,150
+
+[Entity]
+PName=company_customer
+LName=Customer
+Comment=
+TableOption=
+Page=COMPANY
+Left=500
+Top=150
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161006130959
+Position="COMPANY",500,150,280,51
