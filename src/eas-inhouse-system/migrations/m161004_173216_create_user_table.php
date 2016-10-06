@@ -44,7 +44,7 @@ class m161004_173216_create_user_table extends Migration
         $this->addCommentOnColumn($this->table, 'updated_by', 'Update user id');
         $this->addCommentOnColumn($this->table, 'updated_at', 'Create timestamp');
 
-        //$this->createUserAdmin();
+        $this->createUserAdmin();
     }
 
     /**
