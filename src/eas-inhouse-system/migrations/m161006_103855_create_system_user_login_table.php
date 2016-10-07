@@ -29,6 +29,22 @@ class m161006_103855_create_system_user_login_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-system_user_login-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `system_user_login`
+        $this->addPrimaryKey(
+            'pk-system_user_login-id',
+            $this->table,
+            'id'
+        );
+
+        
         // Add comment.
         $this->addCommentOnTable($this->table, 'System Login user');
         $this->addCommentOnColumn($this->table, 'id', 'User id');

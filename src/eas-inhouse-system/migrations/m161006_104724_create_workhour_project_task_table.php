@@ -31,6 +31,22 @@ class m161006_104724_create_workhour_project_task_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-workhour_project_task-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `workhour_project_task`
+        $this->addPrimaryKey(
+            'pk-workhour_project_task-id',
+            $this->table,
+            'id'
+        );
+
+        
         // Add comment.
         $this->addCommentOnTable($this->table, 'Workhour Project Task');
         $this->addCommentOnColumn($this->table, 'id', 'Project Task id');

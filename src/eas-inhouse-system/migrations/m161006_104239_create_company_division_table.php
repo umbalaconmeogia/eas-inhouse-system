@@ -26,6 +26,22 @@ class m161006_104239_create_company_division_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-company_division-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `company_division`
+        $this->addPrimaryKey(
+            'pk-company_division-id',
+            $this->table,
+            'id'
+        );
+
+        
         // Add comment.
         $this->addCommentOnTable($this->table, 'Company Division');
         $this->addCommentOnColumn($this->table, 'id', 'Company Division id');

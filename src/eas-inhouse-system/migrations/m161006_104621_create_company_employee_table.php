@@ -30,6 +30,22 @@ class m161006_104621_create_company_employee_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-company_employee-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `company_employee`
+        $this->addPrimaryKey(
+            'pk-company_employee-id',
+            $this->table,
+            'id'
+        );
+
+        
         // Add comment.
         $this->addCommentOnTable($this->table, 'Company Employee');
         $this->addCommentOnColumn($this->table, 'id', 'Company Employee id');

@@ -20,7 +20,7 @@ class m161004_173216_create_user_table extends Migration
     {
         // Create table.
         $this->createTable($this->table, [
-            'id' => $this->text(),
+            'id' => $this->text()->notNull(),
             'account' => $this->text()->notNull(),
             'password_encryption' => $this->text()->notNull(),
             'access_token' => $this->text(),
@@ -31,6 +31,21 @@ class m161004_173216_create_user_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-user-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `user`
+        $this->addPrimaryKey(
+            'pk-user-id',
+            $this->table,
+            'id'
+        );
+
         // Add comment.
         $this->addCommentOnTable($this->table, 'Login user');
         $this->addCommentOnColumn($this->table, 'id', 'User id');
@@ -44,7 +59,7 @@ class m161004_173216_create_user_table extends Migration
         $this->addCommentOnColumn($this->table, 'updated_by', 'Update user id');
         $this->addCommentOnColumn($this->table, 'updated_at', 'Create timestamp');
 
-        $this->createUserAdmin();
+        //$this->createUserAdmin();
     }
 
     /**

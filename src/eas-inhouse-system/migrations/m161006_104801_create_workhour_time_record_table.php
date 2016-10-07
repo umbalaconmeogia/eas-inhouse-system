@@ -33,6 +33,22 @@ class m161006_104801_create_workhour_time_record_table extends Migration
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
+
+        // creates index for column `id`
+        $this->createIndex(
+            'idx-workhour_time_record-id',
+            $this->table,
+            'id'
+        );
+
+        // add primary key for table `workhour_time_record`
+        $this->addPrimaryKey(
+            'pk-workhour_time_record-id',
+            $this->table,
+            'id'
+        );
+
+        
         // Add comment.
         $this->addCommentOnTable($this->table, 'Workhour Time Record');
         $this->addCommentOnColumn($this->table, 'id', 'Time Record id');
