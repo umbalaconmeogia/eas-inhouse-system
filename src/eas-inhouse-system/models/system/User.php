@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\system;
 
 use Yii;
 
@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property string $id
- * @property string $account
+ * @property string $username
  * @property string $password_encryption
  * @property string $access_token
  * @property string $auth_key
@@ -18,14 +18,14 @@ use Yii;
  * @property string $updated_by
  * @property integer $updated_at
  */
-class User extends \app\models\BaseBatsgModel
+class User extends \app\models\BaseBatsgModel implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'user';
+        return 'system_user';
     }
 
     /**
@@ -34,8 +34,8 @@ class User extends \app\models\BaseBatsgModel
     public function rules()
     {
         return [
-            [['account', 'password_encryption'], 'required'],
-            [['id', 'account', 'password_encryption', 'access_token', 'auth_key', 'created_by', 'updated_by'], 'string'],
+            [['username', 'password_encryption'], 'required'],
+            [['id', 'username', 'password_encryption', 'access_token', 'auth_key', 'created_by', 'updated_by'], 'string'],
             [['data_status', 'created_at', 'updated_at'], 'integer'],
         ];
     }
@@ -47,7 +47,7 @@ class User extends \app\models\BaseBatsgModel
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'account' => Yii::t('app', 'Account'),
+            'username' => Yii::t('app', 'username'),
             'password_encryption' => Yii::t('app', 'Password Encryption'),
             'access_token' => Yii::t('app', 'Access Token'),
             'auth_key' => Yii::t('app', 'Auth Key'),
@@ -79,6 +79,17 @@ class User extends \app\models\BaseBatsgModel
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['access_token' => $token]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return self::findOne(['username' => $username]);
     }
 
     /**
@@ -121,7 +132,7 @@ class User extends \app\models\BaseBatsgModel
      */
     public function validatePassword(string $password)
     {
-        Yii::$app->getSecurity()->validatePassword($password, $this->password_encryption);
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password_encryption);
     }
 
     /**

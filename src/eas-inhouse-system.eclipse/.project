@@ -29,7 +29,7 @@
 		<link>
 			<name>eas-inhouse-system</name>
 			<type>2</type>
-			<location>/data/data/projects.it/eas-inhouse-system/src/eas-inhouse-system</location>
+			<locationURI>PARENT-1-PROJECT_LOC/eas-inhouse-system</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
