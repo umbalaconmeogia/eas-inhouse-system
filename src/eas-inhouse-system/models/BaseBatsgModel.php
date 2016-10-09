@@ -7,6 +7,16 @@ use yii\behaviors\TimestampBehavior;
 
 /**
  * Model that has field $id, $data_status, $created_at, $created_by, $update_time, $updated_by.
+ *
+ * @property mixed $id
+ * @property integer $data_status Record status. 1: new, 2: update, 9: delete.
+ * @property mixed $created_by User id of creator.
+ * @property integer $created_at Created timestamp.
+ * @property mixed $updated_by User id of updator.
+ * @property integer $updated_at Updated timestamp.
+ *
+ * @property string $createdAt Created date time.
+ * @property string $updatedAt Created date time.
  */
 class BaseBatsgModel extends BaseModel
 {
@@ -123,6 +133,25 @@ class BaseBatsgModel extends BaseModel
     public function generateId(string $prefix = NULL)
     {
         return $this->generateUniqueRandomString('id', $prefix);
+    }
+
+    /**
+     * created_at in date time format.
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return \Yii::$app->formatter->asDatetime($this->created_at);
+    }
+
+
+    /**
+     * updated_at in date time format.
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return \Yii::$app->formatter->asDatetime($this->updated_at);
     }
 }
 ?>
