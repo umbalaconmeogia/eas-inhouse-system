@@ -15,6 +15,8 @@ Page=company
 PageInfo="company",7,"A4Landscape",$FFFFFF
 Page=workhour
 PageInfo="workhour",7,"A4Landscape",$FFFFFF
+Page=expenses
+PageInfo="expenses",7,"A4Landscape",$FFFFFF
 Domain==
 LogicalView=1
 DecodeDomain=0
@@ -48,30 +50,279 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
-Entity1=company_employee
-Entity2=workhour_time_record
+Entity1=eas_expenses_transportation
+Entity2=eas_expenses_travel
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=transportation_id
+Cardinarity1=
+Cardinarity2=
+Position="EXPENSES",0,6546,3454,5901,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010213119
+LineMode=0
+Bar1=655
+Bar2=345
+Bar3=590
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=eas_expenses_transportation
+LName=Transportation
+Comment=
+TableOption=
+Page=expenses
+Left=550
+Top=650
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Parent transportation","parent_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161010213056
+Position="expenses",550,650
+
+[Relation]
+Entity1=eas_expenses_monthly_record
+Entity2=eas_expenses_travel
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=monthly_record_id
+Cardinarity1=
+Cardinarity2=
+Position="EXPENSES",0,8199,4075,3803,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010212847
+LineMode=0
+Bar1=820
+Bar2=408
+Bar3=380
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_expenses_monthly_record
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=approver_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,8004,6197,3274,R,R
+Position="EXPENSES",0,3803,6197,5769,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010212827
+LineMode=0
+Bar1=380
+Bar2=620
+Bar3=577
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_expenses_monthly_record
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=empolyee_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,6912,6197,3274,R,R
+Position="EXPENSES",0,3803,6197,3274,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010212811
+LineMode=0
+Bar1=380
+Bar2=620
+Bar3=327
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=eas_expenses_monthly_record
+LName=Monthly record
+Comment=
+TableOption=
+Page=expenses
+Left=550
+Top=400
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Employee","empolyee_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Approver","approver_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Accural month","accural_month","date",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161010212518
+Position="expenses",550,400
+
+[Entity]
+PName=eas_expenses_travel
+LName=Travel expense
+Comment=
+TableOption=
+Page=expenses
+Left=1450
+Top=550
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Monthly record","monthly_record_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Accrual date","accrual_date","date","NOT NULL",,"","",$FFFFFFFF,""
+Field="Transportation","transportation_id","text",,,"","",$FFFFFFFF,""
+Field="Transportation text","transportation_text","text",,,"","",$FFFFFFFF,""
+Field="From","place_from","text",,,"","",$FFFFFFFF,""
+Field="To","place_to","text",,,"","",$FFFFFFFF,""
+Field="Payment amount","amount","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="Remarks","remarks","text",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161010215701
+Position="expenses",1450,550,478,240
+
+[Entity]
+PName=eas_expenses_expense
+LName=Expense
+Comment=
+TableOption=
+Page=expenses
+Left=1450
+Top=200
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Monthly record","monthly_record_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Accrual date","accrual_date","date","NOT NULL",,"","",$FFFFFFFF,""
+Field="Payment recipient","payment_recipient","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Payment_content","payment_content","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Payment amount","amount","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="Remarks","remarks","text",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161010215727
+Position="expenses",1450,200
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_expenses_approval
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=empolyee_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,5765,8590,2182,R,R
+Position="EXPENSES",0,1410,8590,8700,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010210226
+LineMode=0
+Bar1=141
+Bar2=859
+Bar3=870
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_expenses_approval
+RelationType1=1
+RelationType2=3
+Fields1=id
+Fields2=deputy_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,4509,8590,2182,R,R
+Position="EXPENSES",0,1410,8590,5575,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010210209
+LineMode=0
+Bar1=141
+Bar2=859
+Bar3=558
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_expenses_approval
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=authorizer_id
+Cardinarity1=
+Cardinarity2=
+Position="COMPANY",0,3253,8590,2182,R,R
+Position="EXPENSES",0,1410,8590,2182,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20161010210137
+LineMode=0
+Bar1=141
+Bar2=859
+Bar3=218
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=eas_expenses_approval
+LName=Approval
+Comment=
+TableOption=
+Page=expenses
+Left=550
+Top=200
+Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
+Field="Authorizer","authorizer_id","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="Deputy","deputy_id","text",,,"","",$FFFFFFFF,""
+Field="Employee","empolyee_id","text","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20161010205925
+Position="expenses",550,200
+
+[Relation]
+Entity1=eas_company_employee
+Entity2=eas_workhour_time_record
 RelationType1=2
 RelationType2=3
 Fields1=id
 Fields2=employee_id
 Cardinarity1=
 Cardinarity2=
-Position="COMPANY",0,5877,4123,5507,R,R
+Position="COMPANY",0,9206,4123,5507,R,R
 Position="WORKHOUR",0,5877,4123,5507,R,R
 Dependence=0
 Caption=
 PName=
 ModifiedDateTime=20161006132607
 LineMode=0
-Bar1=588
+Bar1=921
 Bar2=412
 Bar3=551
 TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=workhour_project_task
-Entity2=workhour_time_record
+Entity1=eas_workhour_project_task
+Entity2=eas_workhour_time_record
 RelationType1=2
 RelationType2=3
 Fields1=id
@@ -91,8 +342,8 @@ TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=company_project
-Entity2=workhour_project_task
+Entity1=eas_company_project
+Entity2=eas_workhour_project_task
 RelationType1=2
 RelationType2=3
 Fields1=id
@@ -113,8 +364,8 @@ TermPos1=R
 TermPos2=R
 
 [Relation]
-Entity1=workhour_task
-Entity2=workhour_project_task
+Entity1=eas_workhour_task
+Entity2=eas_workhour_project_task
 RelationType1=2
 RelationType2=1
 Fields1=id
@@ -134,7 +385,7 @@ TermPos1=R
 TermPos2=R
 
 [Entity]
-PName=workhour_project_task
+PName=eas_workhour_project_task
 LName=Project Task
 Comment=
 TableOption=
@@ -147,11 +398,11 @@ Field="Task","task_id","text","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006132445
+ModifiedDateTime=20161010210102
 Position="WORKHOUR",550,400
 
 [Entity]
-PName=workhour_time_record
+PName=eas_workhour_time_record
 LName=Time record
 Comment=
 TableOption=
@@ -166,11 +417,11 @@ Field="Employee","employee_id","text","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006133423
+ModifiedDateTime=20161010210055
 Position="WORKHOUR",1050,200
 
 [Entity]
-PName=workhour_task
+PName=eas_workhour_task
 LName=Task
 Comment=
 TableOption=
@@ -183,11 +434,11 @@ Field="Display order","display_order","@INT",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006131808
+ModifiedDateTime=20161010210046
 Position="WORKHOUR",550,200
 
 [Entity]
-PName=system_user_login
+PName=system_user
 LName=User Login
 Comment=
 TableOption=
@@ -202,12 +453,12 @@ Field="Auth key","auth_key","text",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006134018
+ModifiedDateTime=20161010204106
 Position="SYSTEM",550,200
 
 [Relation]
-Entity1=company_division
-Entity2=company_employee
+Entity1=eas_company_division
+Entity2=eas_company_employee
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -227,7 +478,7 @@ TermPos1=R
 TermPos2=R
 
 [Entity]
-PName=company_division
+PName=eas_company_division
 LName=Company Division
 Comment=
 TableOption=
@@ -239,11 +490,11 @@ Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006131420
+ModifiedDateTime=20161010210029
 Position="COMPANY",500,350
 
 [Entity]
-PName=company_employee
+PName=eas_company_employee
 LName=Employee
 Comment=
 TableOption=
@@ -256,12 +507,12 @@ Field="Division","division_id","text",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006131325
-Position="COMPANY",1000,350
+ModifiedDateTime=20161010210038
+Position="COMPANY",1000,350,333,323
 
 [Relation]
-Entity1=company_customer
-Entity2=company_project
+Entity1=eas_company_customer
+Entity2=eas_company_project
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -281,7 +532,7 @@ TermPos1=R
 TermPos2=R
 
 [Entity]
-PName=company_project
+PName=eas_company_project
 LName=Project
 Comment=
 TableOption=
@@ -294,11 +545,11 @@ Field="Customer","customer_id","text",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006131007
+ModifiedDateTime=20161010210020
 Position="COMPANY",1000,150
 
 [Entity]
-PName=company_customer
+PName=eas_company_customer
 LName=Customer
 Comment=
 TableOption=
@@ -310,5 +561,5 @@ Field="Name","name","text","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161006130959
+ModifiedDateTime=20161010210011
 Position="COMPANY",500,150,280,51
