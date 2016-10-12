@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use app\models\User;
+use app\models\system\User;
 
 /**
  * Handles the creation for table `user`.
@@ -11,7 +11,7 @@ class m161004_173216_create_user_table extends Migration
     /**
      * @var string
      */
-    private $table = 'user';
+    private $table = 'system_user';
 
     /**
      * @inheritdoc
@@ -20,36 +20,23 @@ class m161004_173216_create_user_table extends Migration
     {
         // Create table.
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull(),
-            'account' => $this->text()->notNull(),
+            'id' => $this->text(),
+            'username' => $this->text()->notNull(),
             'password_encryption' => $this->text()->notNull(),
             'access_token' => $this->text(),
             'auth_key' => $this->text(),
-            'data_status' => $this->integer(),
+            'data_status' => $this->integer()->defaultValue(1),
             'created_by' => $this->text(),
             'created_at' => $this->integer(),
             'updated_by' => $this->text(),
             'updated_at' => $this->integer(),
         ]);
-
-        // creates index for column `id`
-        $this->createIndex(
-            'idx-user-id',
-            $this->table,
-            'id'
-        );
-
-        // add primary key for table `user`
-        $this->addPrimaryKey(
-            'pk-user-id',
-            $this->table,
-            'id'
-        );
-
+        // Set primary key.
+        $this->addPrimaryKey("pk_{$this->table}", $this->table, 'id');
         // Add comment.
         $this->addCommentOnTable($this->table, 'Login user');
         $this->addCommentOnColumn($this->table, 'id', 'User id');
-        $this->addCommentOnColumn($this->table, 'account', 'Login account');
+        $this->addCommentOnColumn($this->table, 'username', 'Login username');
         $this->addCommentOnColumn($this->table, 'password_encryption', 'Password encryption');
         $this->addCommentOnColumn($this->table, 'access_token', 'Access token');
         $this->addCommentOnColumn($this->table, 'auth_key', 'For cookie-based login');
@@ -59,15 +46,15 @@ class m161004_173216_create_user_table extends Migration
         $this->addCommentOnColumn($this->table, 'updated_by', 'Update user id');
         $this->addCommentOnColumn($this->table, 'updated_at', 'Create timestamp');
 
-        //$this->createUserAdmin();
+        $this->createUserAdmin();
     }
 
     /**
-     * Create the first user (account: admin, password: admin).
+     * Create the first user (username: admin, password: admin).
      */
     private function createUserAdmin()
     {
-        $admin = new User(['account' => 'admin']);
+        $admin = new User(['username' => 'admin']);
         $admin->setPassword('admin');
         $admin->saveThrowError();
     }

@@ -1,21 +1,17 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
+$common = require(__DIR__ . '/common.php');
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'eas-inhouse-xxxxyyyy',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\system\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -28,16 +24,6 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'db' => require(__DIR__ . '/db.php'),
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -47,8 +33,9 @@ $config = [
         ],
         */
     ],
-    'params' => $params,
 ];
+
+$config = array_merge_recursive($common, $config);
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
