@@ -21,7 +21,7 @@ class m161006_104336_create_eas_company_project_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->table, [
-            'id' => $this->text(),
+            'id' => $this->text()->notNull()->unique(),
             'name' => $this->text()->notNull(),
             'company_id' => $this->text()->notNull(),
             'data_status' => $this->integer()->defaultValue(1),
