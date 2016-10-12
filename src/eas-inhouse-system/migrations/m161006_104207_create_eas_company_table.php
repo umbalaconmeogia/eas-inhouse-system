@@ -3,24 +3,36 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `company_customer`.
+ * Handles the creation for table `eas_company`.
  */
-class m161006_104207_create_company_customer_table extends Migration
+class m161006_104207_create_eas_company_table extends Migration
 {
     /**
      * @var string
      */
-    private $table = 'company_customer';
+    private $table = 'eas_company';
 
     /**
      * @inheritdoc
      */
     public function safeUp()
     {
-        $this->createTable('company_customer', [
+        $this->createTable($this->table, [
             'id' => $this->text()->notNull()->unique(),
-            'name' => $this->text(),
-            'data_status' => $this->integer(),
+            'name' => $this->text()->notNull(),
+            'name_kana' => $this->text(),
+            'name_short' => $this->text(),
+            'tel' => $this->text(),
+            'fax' => $this->text(),
+            'email' => $this->text(),
+            'zip_code' => $this->text(),
+            'address1' => $this->text(),
+            'address2' => $this->text(),
+            'homepage' => $this->text(),
+            'industry' => $this->text(),
+            'remarks' => $this->text(),
+            'is_eas' => $this->integer(),
+            'data_status' => $this->integer()->defaultValue(1),
             'created_by' => $this->text(),
             'created_at' => $this->integer(),
             'updated_by' => $this->text(),
@@ -29,21 +41,20 @@ class m161006_104207_create_company_customer_table extends Migration
 
         // creates index for column `id`
         $this->createIndex(
-            'idx-company_customer-id',
+            "idx-{$this->table}-id",
             $this->table,
             'id'
         );
 
-        // add primary key for table `company_customer`
+        // add primary key for table `eas_company`
         $this->addPrimaryKey(
-            'pk-company_customer-id',
+            "pk_{$this->table}",
             $this->table,
             'id'
         );
-
         
         // Add comment.
-        $this->addCommentOnTable($this->table, 'Company Customer');
+        $this->addCommentOnTable($this->table, 'Company');
         $this->addCommentOnColumn($this->table, 'id', 'Customer id');
         $this->addCommentOnColumn($this->table, 'name', 'Customer name');
         $this->addCommentOnColumn($this->table, 'data_status', 'Data status');
@@ -58,6 +69,6 @@ class m161006_104207_create_company_customer_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('company_customer');
+        $this->dropTable($this->table);
     }
 }
