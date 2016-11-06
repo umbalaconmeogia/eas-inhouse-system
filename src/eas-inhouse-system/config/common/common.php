@@ -1,4 +1,7 @@
 <?php
+/**
+ * Common configuration for both web and console.
+ */
 return [
     'bootstrap' => ['log'],
     'components' => [
@@ -26,4 +29,5 @@ return [
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => require(__DIR__ . '/params.php'),
+    'modules' => require(__DIR__ . '/modules.php'),
 ];

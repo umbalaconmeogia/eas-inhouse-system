@@ -6,12 +6,12 @@ use app\models\system\User;
 /**
  * Handles the creation for table `user`.
  */
-class m161004_173216_create_user_table extends Migration
+class m161004_173216_create_login_user_table extends Migration
 {
     /**
      * @var string
      */
-    private $table = 'system_user';
+    private $table = 'login_user';
 
     /**
      * @inheritdoc
@@ -21,7 +21,7 @@ class m161004_173216_create_user_table extends Migration
         // Create table.
         $this->createTable($this->table, [
             'id' => $this->text(),
-            'username' => $this->text()->notNull(),
+            'username' => $this->text()->unique()->notNull(),
             'password_encryption' => $this->text()->notNull(),
             'access_token' => $this->text(),
             'auth_key' => $this->text(),
@@ -32,7 +32,7 @@ class m161004_173216_create_user_table extends Migration
             'updated_at' => $this->integer(),
         ]);
         // Set primary key.
-        $this->addPrimaryKey("pk_{$this->table}", $this->table, 'id');
+        $this->addPrimaryKey("{$this->table}_pkey", $this->table, 'id');
         // Add comment.
         $this->addCommentOnTable($this->table, 'Login user');
         $this->addCommentOnColumn($this->table, 'id', 'User id');

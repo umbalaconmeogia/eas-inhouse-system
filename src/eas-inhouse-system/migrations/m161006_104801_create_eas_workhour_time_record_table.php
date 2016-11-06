@@ -22,7 +22,7 @@ class m161006_104801_create_eas_workhour_time_record_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull()->unique(),
+            'id' => $this->text()->unique(),
             'project_task_id' => $this->text()->notNull(),
             'working_time' => $this->float(),
             'working_date' => $this->date()->notNull(),
@@ -48,7 +48,7 @@ class m161006_104801_create_eas_workhour_time_record_table extends Migration
             'id'
         );
 
-        
+
         // Add comment.
         $this->addCommentOnTable($this->table, 'Workhour Time Record');
         $this->addCommentOnColumn($this->table, 'id', 'Time Record id');

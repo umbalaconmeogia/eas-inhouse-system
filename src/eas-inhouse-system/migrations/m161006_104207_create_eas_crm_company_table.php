@@ -1,24 +1,31 @@
 <?php
 
 use yii\db\Migration;
+use app\models\easCrm\Company;
 
 /**
  * Handles the creation for table `eas_company`.
  */
-class m161006_104207_create_eas_company_table extends Migration
+class m161006_104207_create_eas_crm_company_table extends Migration
 {
     /**
      * @var string
      */
-    private $table = 'eas_company';
+    private $table = 'eas_crm_company';
 
     /**
      * @inheritdoc
      */
     public function safeUp()
     {
+        $this->createDbTable();
+//         $this->initializeData(); // Add eas company data.
+    }
+
+    private function createDbTable()
+    {
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull()->unique(),
+            'id' => $this->text(),
             'name' => $this->text()->notNull(),
             'name_kana' => $this->text(),
             'name_short' => $this->text(),
@@ -31,7 +38,7 @@ class m161006_104207_create_eas_company_table extends Migration
             'homepage' => $this->text(),
             'industry' => $this->text(),
             'remarks' => $this->text(),
-            'is_eas' => $this->integer(),
+            'is_eas' => $this->integer()->defaultValue(0),
             'data_status' => $this->integer()->defaultValue(1),
             'created_by' => $this->text(),
             'created_at' => $this->integer(),
@@ -39,20 +46,9 @@ class m161006_104207_create_eas_company_table extends Migration
             'updated_at' => $this->integer(),
         ]);
 
-        // creates index for column `id`
-        $this->createIndex(
-            "idx-{$this->table}-id",
-            $this->table,
-            'id'
-        );
+        // Add primary key for table `eas_crm_company`
+        $this->addPrimaryKey("{$this->table}_pkey", $this->table, 'id');
 
-        // add primary key for table `eas_company`
-        $this->addPrimaryKey(
-            "pk_{$this->table}",
-            $this->table,
-            'id'
-        );
-        
         // Add comment.
         $this->addCommentOnTable($this->table, 'Company');
         $this->addCommentOnColumn($this->table, 'id', 'Customer id');
@@ -62,6 +58,26 @@ class m161006_104207_create_eas_company_table extends Migration
         $this->addCommentOnColumn($this->table, 'created_at', 'Created timestamp');
         $this->addCommentOnColumn($this->table, 'updated_by', 'Updated user id');
         $this->addCommentOnColumn($this->table, 'updated_at', 'Created timestamp');
+    }
+
+    private function initializeData()
+    {
+        $company = new Company([
+            'name' => '株式会社 EVA',
+            'name_kana' => 'カ）イーヴィーエー',
+            'name_short' => 'EVA',
+            'tel' => '090-2007-9057',
+            'email' => 'info@evolable.asia',
+            'zip_code' => '182-0024',
+            'address1' => '東京都調布市布田2-9-5',
+            'address2' => '#201',
+            'homepage' => 'http://eas.evolable.asia',
+            'remarks' => '本店住所は調布市',
+            'industry' => 'IT',
+            'is_eas' => 1,
+        ]);
+
+        $company->saveThrowError();
     }
 
     /**

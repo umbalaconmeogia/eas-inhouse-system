@@ -2,7 +2,7 @@
 
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
 
-$common = require(__DIR__ . '/common.php');
+$common = require(__DIR__ . '/common/common.php');
 
 $config = [
     'id' => 'basic-console',

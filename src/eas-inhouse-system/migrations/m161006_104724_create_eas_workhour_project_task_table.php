@@ -22,7 +22,7 @@ class m161006_104724_create_eas_workhour_project_task_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull()->unique(),
+            'id' => $this->text()->unique(),
             'project_id' => $this->text()->notNull(),
             'task_id' => $this->text()->notNull(),
             'data_status' => $this->integer()->defaultValue(1),
@@ -46,7 +46,7 @@ class m161006_104724_create_eas_workhour_project_task_table extends Migration
             'id'
         );
 
-        
+
         // Add comment.
         $this->addCommentOnTable($this->table, 'Workhour Project Task');
         $this->addCommentOnColumn($this->table, 'id', 'Project Task id');

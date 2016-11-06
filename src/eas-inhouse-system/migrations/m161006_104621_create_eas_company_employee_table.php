@@ -22,7 +22,7 @@ class m161006_104621_create_eas_company_employee_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull()->unique(),
+            'id' => $this->text()->unique(),
             'company_id' => $this->text()->notNull(),
             'division_id' => $this->text(),
             'name' => $this->text()->notNull(),
@@ -56,7 +56,7 @@ class m161006_104621_create_eas_company_employee_table extends Migration
             'id'
         );
 
-        
+
         // Add comment.
         $this->addCommentOnTable($this->table, 'Company Employee');
         $this->addCommentOnColumn($this->table, 'id', 'Company Employee id');

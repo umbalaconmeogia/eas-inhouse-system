@@ -136,21 +136,17 @@ class User extends \app\models\BaseBatsgModel implements \yii\web\IdentityInterf
     }
 
     /**
-     * Generate id, auth_key for new record.
+     * Generate auth_key for new record.
      * {@inheritDoc}
      * @see \yii\db\BaseActiveRecord::beforeSave()
      */
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                // Set user id.
-                $this->id = $this->generateId('user');
-                // Set auth_key
-                $this->auth_key = \Yii::$app->security->generateRandomString();
-            }
-            return true;
+        $result = parent::beforeSave($insert);
+        if ($result && $this->isNewRecord) {
+            // Set auth_key
+            $this->auth_key = \Yii::$app->security->generateRandomString();
         }
-        return false;
+        return $result;
     }
 }

@@ -1,6 +1,5 @@
 <?php
-
-$common = require(__DIR__ . '/common.php');
+$common = require(__DIR__ . '/common/common.php');
 
 $config = [
     'id' => 'basic',

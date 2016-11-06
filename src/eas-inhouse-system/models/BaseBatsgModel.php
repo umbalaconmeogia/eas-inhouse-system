@@ -144,7 +144,6 @@ class BaseBatsgModel extends BaseModel
         return \Yii::$app->formatter->asDatetime($this->created_at);
     }
 
-
     /**
      * updated_at in date time format.
      * @return string
@@ -152,6 +151,22 @@ class BaseBatsgModel extends BaseModel
     public function getUpdatedAt()
     {
         return \Yii::$app->formatter->asDatetime($this->updated_at);
+    }
+
+    /**
+     * Generate id for new record.
+     * {@inheritDoc}
+     * @see \yii\db\BaseActiveRecord::beforeSave()
+     */
+    public function beforeSave($insert)
+    {
+        $result = parent::beforeSave($insert);
+        if ($result && $this->isNewRecord) {
+            // Set id.
+            // TODO: change this to class name.
+            $this->id = $this->generateId($this->tableName() . '-');
+        }
+        return $result;
     }
 }
 ?>

@@ -21,7 +21,7 @@ class m161006_104336_create_eas_company_project_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->table, [
-            'id' => $this->text()->notNull()->unique(),
+            'id' => $this->text()->unique(),
             'name' => $this->text()->notNull(),
             'company_id' => $this->text()->notNull(),
             'data_status' => $this->integer()->defaultValue(1),
@@ -45,7 +45,7 @@ class m161006_104336_create_eas_company_project_table extends Migration
             'id'
         );
 
-        
+
         // Add comment.
         $this->addCommentOnTable($this->table, 'Company Project');
         $this->addCommentOnColumn($this->table, 'id', 'Company Project id');
@@ -69,7 +69,7 @@ class m161006_104336_create_eas_company_project_table extends Migration
             'fk-company_project-company_id',
             $this->table,
             'company_id',
-            'eas_company',
+            'eas_company_company',
             'id',
             'CASCADE'
         );
