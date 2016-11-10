@@ -18,12 +18,6 @@ class m161006_104207_create_eas_crm_company_table extends BaseMigration
      */
     public function safeUp()
     {
-        $this->createDbTable();
-        $this->initializeData(); // Add eas company data.
-    }
-
-    private function createDbTable()
-    {
         $this->createTableWithExtraFields($this->table, [
             'name' => $this->text()->notNull(),
             'name_kana' => $this->text(),
@@ -43,26 +37,6 @@ class m161006_104207_create_eas_crm_company_table extends BaseMigration
         $this->addComments($this->table, 'Company', [
             'name' => 'Customer name',
         ]);
-    }
-
-    private function initializeData()
-    {
-        $company = new Company([
-            'name' => '株式会社 EVA',
-            'name_kana' => 'カ）イーヴィーエー',
-            'name_short' => 'EVA',
-            'tel' => '090-2007-9057',
-            'email' => 'info@evolable.asia',
-            'zip_code' => '182-0024',
-            'address1' => '東京都調布市布田2-9-5',
-            'address2' => '#201',
-            'homepage' => 'http://eas.evolable.asia',
-            'remarks' => '本店住所は調布市',
-            'industry' => 'IT',
-            'is_eas' => 1,
-        ]);
-
-        $company->saveThrowError();
     }
 
     /**

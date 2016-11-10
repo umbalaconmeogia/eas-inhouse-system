@@ -23,12 +23,6 @@ class m161006_104239_create_eas_crm_division_table extends BaseMigration
      */
     public function safeUp()
     {
-        $this->createDbTable();
-        $this->initializeData(); // Add eas company data.
-    }
-
-    private function createDbTable()
-    {
         $this->createTableWithExtraFields($this->table, [
             'company_id' => $this->text()->notNull(),
             'name' => $this->text()->notNull(),
@@ -45,34 +39,6 @@ class m161006_104239_create_eas_crm_division_table extends BaseMigration
         ]);
 
         $this->addForeignKeys($this->table, 'company_id', 'eas_crm_company', 'id');
-    }
-
-    private function initializeData()
-    {
-        // Get EAS company info.
-        $company = Company::findOne(['is_eas' => 1]);
-        if (!$company) {
-            throw new Exception("Error finding EAS company.");
-        }
-        // Create JP divisions.
-        (new Division([
-                'company_id' => $company->id,
-                'name' => 'JP',
-                'tel' => '090-2007-9057',
-                'email' => 'thanhtt@evolable.asia',
-                'zip_code' => '105-6219',
-                'address1' => '東京都港区愛宕2-5-1',
-                'address2' => '愛宕グリーンヒルズMORIタワー19F',
-                'remarks' => 'エボラブルアジア同オフィス',
-        ]))->saveThrowError();
-        // Create VN divisions.
-        (new Division([
-                'company_id' => $company->id,
-                'name' => 'VN',
-                'address1' => '9F Viet A Building, Duy Tan Street',
-                'address2' => 'Cau Giay District, Ha Noi, Vietnam',
-                'remarks' => 'エボラブルアジア　ハノイ　オフィス',
-        ]))->saveThrowError();
     }
 
     /**
