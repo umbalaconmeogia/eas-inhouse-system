@@ -9,7 +9,7 @@ use batsg\migrations\BaseMigration;
  * - `eas_company`
  * - `eas_company_division`
  */
-class m161006_104336_create_eas_employee_table extends BaseMigration
+class m161006_104336_create_eas_crm_employee_table extends BaseMigration
 {
     /**
      * @var string

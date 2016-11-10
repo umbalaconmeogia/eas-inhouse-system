@@ -1,0 +1,1 @@
+./yii migrate --migrationPath=@app/modules/easCrm/migrations

@@ -36,6 +36,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => 'Company', 'url' => ['/easCrm/company/index']],
+            ['label' => 'Division', 'url' => ['/easCrm/division/index']],
+            ['label' => 'Employee', 'url' => ['/easCrm/employee/index']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

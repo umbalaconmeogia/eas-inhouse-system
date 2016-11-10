@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\easCrm;
+namespace app\modules\easCrm\models;
 
 use Yii;
 
@@ -27,8 +27,8 @@ use Yii;
  * @property string $title
  * @property string $remarks
  *
- * @property EasCrmCompany $company
- * @property EasCrmDivision $division
+ * @property Company $company
+ * @property Division $division
  */
 class Employee extends \batsg\models\BaseBatsgModel
 {
@@ -46,10 +46,12 @@ class Employee extends \batsg\models\BaseBatsgModel
     public function rules()
     {
         return [
-            [['id', 'company_id', 'name'], 'required'],
+            [['company_id', 'name'], 'required'],
             [['id', 'created_by', 'updated_by', 'company_id', 'division_id', 'employee_number', 'name', 'name_kana', 'tel', 'tel_ext', 'fax', 'mobile', 'email', 'title', 'remarks'], 'string'],
             [['data_status', 'created_at', 'updated_at', 'gender'], 'integer'],
             [['employee_number'], 'unique'],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
+            [['division_id'], 'exist', 'skipOnError' => true, 'targetClass' => Division::className(), 'targetAttribute' => ['division_id' => 'id']],
         ];
     }
 

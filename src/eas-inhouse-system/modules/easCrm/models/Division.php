@@ -1,11 +1,11 @@
 <?php
 
-namespace app\models\easCrm;
+namespace app\modules\easCrm\models;
 
 use Yii;
 
 /**
- * This is the model class for table "eas_crm_company".
+ * This is the model class for table "eas_crm_division".
  *
  * @property string $id
  * @property integer $data_status
@@ -13,6 +13,7 @@ use Yii;
  * @property integer $created_at
  * @property string $updated_by
  * @property integer $updated_at
+ * @property string $company_id
  * @property string $name
  * @property string $name_kana
  * @property string $name_short
@@ -23,18 +24,19 @@ use Yii;
  * @property string $address1
  * @property string $address2
  * @property string $homepage
- * @property string $industry
  * @property string $remarks
- * @property integer $is_eas
+ *
+ * @property Company $company
+ * @property Employee[] $employees
  */
-class Company extends \batsg\models\BaseBatsgModel
+class Division extends \batsg\models\BaseBatsgModel
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'eas_crm_company';
+        return 'eas_crm_division';
     }
 
     /**
@@ -43,9 +45,10 @@ class Company extends \batsg\models\BaseBatsgModel
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
-            [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'industry', 'remarks'], 'string'],
-            [['data_status', 'created_at', 'updated_at', 'is_eas'], 'integer'],
+            [['company_id', 'name'], 'required'],
+            [['id', 'created_by', 'updated_by', 'company_id', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'remarks'], 'string'],
+            [['data_status', 'created_at', 'updated_at'], 'integer'],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -61,6 +64,7 @@ class Company extends \batsg\models\BaseBatsgModel
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'company_id' => Yii::t('app', 'Company ID'),
             'name' => Yii::t('app', 'Name'),
             'name_kana' => Yii::t('app', 'Name Kana'),
             'name_short' => Yii::t('app', 'Name Short'),
@@ -71,9 +75,23 @@ class Company extends \batsg\models\BaseBatsgModel
             'address1' => Yii::t('app', 'Address1'),
             'address2' => Yii::t('app', 'Address2'),
             'homepage' => Yii::t('app', 'Homepage'),
-            'industry' => Yii::t('app', 'Industry'),
             'remarks' => Yii::t('app', 'Remarks'),
-            'is_eas' => Yii::t('app', 'Is Eas'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['id' => 'company_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployees()
+    {
+        return $this->hasMany(Employee::className(), ['division_id' => 'id']);
     }
 }

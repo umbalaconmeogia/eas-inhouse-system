@@ -6,4 +6,7 @@ return [
     'easCrm' => [
         'class' => 'app\modules\easCrm\Module',
     ],
+    'easProject' => [
+        'class' => 'app\modules\easProject\Module',
+    ],
 ];

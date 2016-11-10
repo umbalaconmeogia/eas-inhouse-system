@@ -30,6 +30,7 @@ return [
     ],
     'aliases' => [
         '@batsg' => '@app/components/yii2-batsg',
+        '@easCrm' => '@app/module/easCrm',
     ],
 	'params' => require(__DIR__ . '/params.php'),
     'modules' => require(__DIR__ . '/modules.php'),
