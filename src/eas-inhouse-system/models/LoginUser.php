@@ -5,18 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "login_user".
  *
  * @property string $id
- * @property string $username
- * @property string $password_encryption
- * @property string $access_token
- * @property string $auth_key
  * @property integer $data_status
  * @property string $created_by
  * @property integer $created_at
  * @property string $updated_by
  * @property integer $updated_at
+ * @property string $username
+ * @property string $password_encryption
+ * @property string $access_token
+ * @property string $auth_key
+ * @property integer $must_change_password
  */
 class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\IdentityInterface
 {
@@ -34,9 +35,10 @@ class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\Identit
     public function rules()
     {
         return [
-            [['username', 'password_encryption'], 'required'],
-            [['id', 'username', 'password_encryption', 'access_token', 'auth_key', 'created_by', 'updated_by'], 'string'],
-            [['data_status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'username', 'password_encryption'], 'required'],
+            [['id', 'created_by', 'updated_by', 'username', 'password_encryption', 'access_token', 'auth_key'], 'string'],
+            [['data_status', 'created_at', 'updated_at', 'must_change_password'], 'integer'],
+            [['username'], 'unique'],
         ];
     }
 
@@ -47,15 +49,16 @@ class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\Identit
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'username'),
-            'password_encryption' => Yii::t('app', 'Password Encryption'),
-            'access_token' => Yii::t('app', 'Access Token'),
-            'auth_key' => Yii::t('app', 'Auth Key'),
             'data_status' => Yii::t('app', 'Data Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'username' => Yii::t('app', 'Username'),
+            'password_encryption' => Yii::t('app', 'Password Encryption'),
+            'access_token' => Yii::t('app', 'Access Token'),
+            'auth_key' => Yii::t('app', 'Auth Key'),
+            'must_change_password' => Yii::t('app', 'Must Change Password'),
         ];
     }
 

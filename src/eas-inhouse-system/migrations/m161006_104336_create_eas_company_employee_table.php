@@ -9,7 +9,7 @@ use yii\db\Migration;
  * - `eas_company`
  * - `eas_company_division`
  */
-class m161006_104621_create_eas_company_employee_table extends Migration
+class m161006_104336_create_eas_company_employee_table extends Migration
 {
     /**
      * @var string

@@ -1,10 +1,9 @@
 <?php
 
-use yii\db\Migration;
-use app\models\easCompany\Company;
+use app\models\easCrm\Company;
+use app\models\easCrm\Division;
+use batsg\migrations\BaseMigration;
 use yii\base\Exception;
-use app\models\easCompany\Division;
-use yii\base\Object;
 
 /**
  * Handles the creation for table `eas_company_division`.
@@ -12,7 +11,7 @@ use yii\base\Object;
  *
  * - `eas_company`
  */
-class m161006_104239_create_eas_crm_division_table extends Migration
+class m161006_104239_create_eas_crm_division_table extends BaseMigration
 {
     /**
      * @var string
@@ -25,13 +24,12 @@ class m161006_104239_create_eas_crm_division_table extends Migration
     public function safeUp()
     {
         $this->createDbTable();
-//         $this->initializeData(); // Add eas company data.
+        $this->initializeData(); // Add eas company data.
     }
 
     private function createDbTable()
     {
-        $this->createTable($this->table, [
-            'id' => $this->text(),
+        $this->createTableWithExtraFields($this->table, [
             'company_id' => $this->text()->notNull(),
             'name' => $this->text()->notNull(),
             'name_kana' => $this->text(),
@@ -44,31 +42,9 @@ class m161006_104239_create_eas_crm_division_table extends Migration
             'address2' => $this->text(),
             'homepage' => $this->text(),
             'remarks' => $this->text(),
-            'data_status' => $this->integer()->defaultValue(1),
-            'created_by' => $this->text(),
-            'created_at' => $this->integer(),
-            'updated_by' => $this->text(),
-            'updated_at' => $this->integer(),
         ]);
 
-        // Add primary key for table `crm_division`
-        $this->addPrimaryKey("{$this->table}_pkey", $this->table, 'id');
-
-//         // creates index for column `company_id`
-//         $this->createIndex(
-//             'idx-eas_company_division-company_id',
-//             $this->table,
-//             'company_id'
-//         );
-
-        // add foreign key for table `eas_company`
-        $this->addForeignKey(
-            'eas_crm_division-company_id_fkey',
-            $this->table,
-            'company_id',
-            'eas_crm_company',
-            'id'
-        );
+        $this->addForeignKeys($this->table, 'company_id', 'eas_crm_company', 'id');
     }
 
     private function initializeData()
@@ -104,18 +80,6 @@ class m161006_104239_create_eas_crm_division_table extends Migration
      */
     public function safeDown()
     {
-//         // drops foreign key for table `eas_company`
-//         $this->dropForeignKey(
-//             'fk-eas_company_division-company_id',
-//             $this->table
-//         );
-
-//         // drops index for column `company_id`
-//         $this->dropIndex(
-//             'idx-eas_company_division-company_id',
-//             $this->table
-//         );
-
         $this->dropTable($this->table);
     }
 }

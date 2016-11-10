@@ -8,6 +8,35 @@ use yii\db\Migration;
  */
 class BaseMigration extends Migration
 {
+    public static function constraintNamePrimaryKey($table, $column)
+    {
+        return self::constraintName($table, $column, 'pkey');
+    }
+
+    public static function constraintNameForeignKey($table, $column)
+    {
+        return self::constraintName($table, $column, 'fkey');
+    }
+
+    public static function constraintNameIndex($table, $column)
+    {
+        return self::constraintName($table, $column, 'idx');
+    }
+
+    /**
+     * Make constraint name.
+     * @param string $table
+     * @param string|string[] $columns
+     * @param string $suffix
+     * @return string
+     */
+    private static function constraintName($table, $columns, $suffix)
+    {
+        if (!is_array($columns)) {
+            $columns = [$columns];
+        }
+        return join('_', array_merge([$table], $columns, [$suffix]));
+    }
     /**
      * Create a table with specified columns, including the column bellow automatically.
      * <ul>
@@ -55,6 +84,42 @@ class BaseMigration extends Migration
         }
         if ($tableComment) {
             $this->addCommentOnTable($table, $tableComment);
+        }
+    }
+
+    /**
+     * Example usage:
+     * <pre>
+     *   // tbl_employee.company_id refer to tbl_company.id
+     *   $this->addForeignKeys('tbl_employee', 'company_id', 'tbl_company', 'id');
+     *
+     *   // tbl_employee.company_id refer to tbl_company.id and
+     *   // tbl_employee.division_id refer to tbl_division.id
+     *   $this->addForeignKeys('tbl_employee', [
+     *     ['company_id', 'tbl_company', 'id'],
+     *     ['division_id', 'tbl_division', 'id'],
+     *   ]);
+     * </pre>
+     * @param string $table the table that the foreign key constraint will be added to.
+     * @param string|array[] $columns A column or
+     *                       an array with each element is an array that contains column, refTable, refColumn.
+     * @param string $refTable
+     * @param string $refColumn
+     */
+    protected function addForeignKeys($table, $columns, $refTable = NULL, $refColumn = NULL)
+    {
+        if ($refTable != NULL) {
+            $columns = [[$columns, $refTable, $refColumn]];
+        }
+        foreach ($columns as $columnReference) {
+            list($column, $refTable, $refColumn) = $columnReference;
+            echo "$column, $refTable, $refColumn\n";
+            // Create foreign key.
+            $this->addForeignKey(self::constraintNameForeignKey($table, $column),
+                $table, $column, $refTable, $refColumn);
+            // Create index for foreign key column.
+            $this->createIndex(self::constraintNameIndex($table, $column),
+                $table, $column);
         }
     }
 }

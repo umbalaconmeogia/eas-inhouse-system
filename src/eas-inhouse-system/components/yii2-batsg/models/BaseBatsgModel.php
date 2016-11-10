@@ -156,15 +156,14 @@ class BaseBatsgModel extends BaseModel
     /**
      * Generate id for new record.
      * {@inheritDoc}
-     * @see \yii\db\BaseActiveRecord::beforeSave()
+     * @see \yii\base\Model::beforeValidate()
      */
-    public function beforeSave($insert)
+    public function beforeValidate()
     {
-        $result = parent::beforeSave($insert);
+        $result = parent::beforeValidate();
         if ($result && $this->isNewRecord) {
             // Set id.
-            // TODO: change this to class name.
-            $this->id = $this->generateId($this->tableName() . '-');
+            $this->id = $this->generateId((new \ReflectionClass($this))->getShortName() . '-');
         }
         return $result;
     }
