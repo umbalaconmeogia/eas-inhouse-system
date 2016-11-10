@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace batsg\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -114,7 +114,7 @@ class BaseBatsgModel extends BaseModel
      * @param number $length The length of the string.
      * @return string
      */
-    public function generateUniqueRandomString(string $attribute, string $prefix, $length = 32)
+    public function generateUniqueRandomString($attribute, $prefix, $length = 32)
     {
         $randomString = $prefix . Yii::$app->getSecurity()->generateRandomString($length);
 
@@ -130,7 +130,7 @@ class BaseBatsgModel extends BaseModel
      * @param string $prefix
      * @return string
      */
-    public function generateId(string $prefix = NULL)
+    public function generateId($prefix = NULL)
     {
         return $this->generateUniqueRandomString('id', $prefix);
     }

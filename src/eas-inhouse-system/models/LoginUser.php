@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\system;
+namespace app\models;
 
 use Yii;
 
@@ -18,14 +18,14 @@ use Yii;
  * @property string $updated_by
  * @property integer $updated_at
  */
-class User extends \app\models\BaseBatsgModel implements \yii\web\IdentityInterface
+class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'system_user';
+        return 'login_user';
     }
 
     /**
@@ -121,7 +121,7 @@ class User extends \app\models\BaseBatsgModel implements \yii\web\IdentityInterf
      * Store the hashed password.
      * @param string $password
      */
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         $this->password_encryption = Yii::$app->getSecurity()->generatePasswordHash($password);
     }
@@ -130,7 +130,7 @@ class User extends \app\models\BaseBatsgModel implements \yii\web\IdentityInterf
      * Check if a password is correct comparing to saved one.
      * @param string $password
      */
-    public function validatePassword(string $password)
+    public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password_encryption);
     }

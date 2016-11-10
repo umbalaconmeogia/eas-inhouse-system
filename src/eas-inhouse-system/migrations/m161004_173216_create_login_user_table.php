@@ -1,12 +1,12 @@
 <?php
 
-use yii\db\Migration;
-use app\models\system\User;
+use app\models\LoginUser;
+use batsg\migrations\BaseMigration;
 
 /**
  * Handles the creation for table `user`.
  */
-class m161004_173216_create_login_user_table extends Migration
+class m161004_173216_create_login_user_table extends BaseMigration
 {
     /**
      * @var string
@@ -54,7 +54,7 @@ class m161004_173216_create_login_user_table extends Migration
      */
     private function createUserAdmin()
     {
-        $admin = new User(['username' => 'admin']);
+        $admin = new LoginUser(['username' => 'admin']);
         $admin->setPassword('admin');
         $admin->saveThrowError();
     }

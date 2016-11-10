@@ -5,6 +5,7 @@
 return [
     'bootstrap' => ['log'],
     'components' => [
+        'db' => require(__DIR__ . '/db.php'),
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -26,8 +27,10 @@ return [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
     ],
-    'params' => require(__DIR__ . '/params.php'),
+    'aliases' => [
+        '@batsg' => '@app/components/yii2-batsg',
+    ],
+	'params' => require(__DIR__ . '/params.php'),
     'modules' => require(__DIR__ . '/modules.php'),
 ];

@@ -10,7 +10,7 @@ $config = [
             'cookieValidationKey' => 'eas-inhouse-xxxxyyyy',
         ],
         'user' => [
-            'identityClass' => 'app\models\system\User',
+            'identityClass' => 'app\models\LoginUser',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
