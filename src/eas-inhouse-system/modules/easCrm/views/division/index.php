@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\easCrm\models\DivisionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Divisions';
+$this->title = Yii::t('app', 'Divisions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="division-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Division', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Division'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'zip_code:ntext',
             'address1:ntext',
             'address2:ntext',
+            'iso_country_code:ntext',
             'homepage:ntext',
             'remarks:ntext',
 

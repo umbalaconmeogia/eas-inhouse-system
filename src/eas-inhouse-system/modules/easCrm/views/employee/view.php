@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\easCrm\models\Employee */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employees'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,19 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id:ntext',
             'company_id:ntext',
             'division_id:ntext',
             'employee_number:ntext',
-            'name:ntext',
-            'name_kana:ntext',
+            'first_name:ntext',
+            'middle_name:ntext',
+            'last_name:ntext',
+            'first_name_kana:ntext',
+            'last_name_kana:ntext',
+            'middle_name_kana:ntext',
             'gender',
             'tel:ntext',
             'tel_ext:ntext',
             'fax:ntext',
             'mobile:ntext',
             'email:ntext',
-            'title:ntext',
+            'job_title:ntext',
+            'zip_code:ntext',
+            'address1:ntext',
+            'address2:ntext',
+            'iso_country_code:ntext',
             'remarks:ntext',
         ],
     ]) ?>

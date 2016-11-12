@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\easCrm\models\EmployeeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Employees';
+$this->title = Yii::t('app', 'Employees');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Employee'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,19 +24,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id:ntext',
             'company_id:ntext',
             'division_id:ntext',
             'employee_number:ntext',
-            'name:ntext',
-            'name_kana:ntext',
+            'first_name:ntext',
+            'middle_name:ntext',
+            'last_name:ntext',
+            'first_name_kana:ntext',
+            'last_name_kana:ntext',
+            'middle_name_kana:ntext',
             'gender',
             'tel:ntext',
             'tel_ext:ntext',
             'fax:ntext',
             'mobile:ntext',
             'email:ntext',
-            'title:ntext',
+            'job_title:ntext',
+            'zip_code:ntext',
+            'address1:ntext',
+            'address2:ntext',
+            'iso_country_code:ntext',
             'remarks:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],

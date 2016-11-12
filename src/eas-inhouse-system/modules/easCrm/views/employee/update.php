@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\easCrm\models\Employee */
 
-$this->title = 'Update Employee: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('app', 'Update {modelClass}: ', [
+    'modelClass' => 'Employee',
+]) . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employees'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="employee-update">
 

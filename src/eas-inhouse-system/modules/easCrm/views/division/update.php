@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\easCrm\models\Division */
 
-$this->title = 'Update Division: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Divisions', 'url' => ['index']];
+$this->title = Yii::t('app', 'Update {modelClass}: ', [
+    'modelClass' => 'Division',
+]) . $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Divisions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="division-update">
 

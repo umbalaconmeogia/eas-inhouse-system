@@ -18,7 +18,7 @@ class DivisionSearch extends Division
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by', 'company_id', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'remarks'], 'safe'],
+            [['id', 'created_by', 'updated_by', 'company_id', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'iso_country_code', 'homepage', 'remarks'], 'safe'],
             [['data_status', 'created_at', 'updated_at'], 'integer'],
         ];
     }
@@ -77,6 +77,7 @@ class DivisionSearch extends Division
             ->andFilterWhere(['like', 'zip_code', $this->zip_code])
             ->andFilterWhere(['like', 'address1', $this->address1])
             ->andFilterWhere(['like', 'address2', $this->address2])
+            ->andFilterWhere(['like', 'iso_country_code', $this->iso_country_code])
             ->andFilterWhere(['like', 'homepage', $this->homepage])
             ->andFilterWhere(['like', 'remarks', $this->remarks]);
 

@@ -56,7 +56,7 @@ class DefaultController extends Controller
             'homepage' => 'http://eas.evolable.asia',
             'remarks' => '本店住所は調布市',
             'industry' => 'IT',
-            'is_eas' => 1,
+            'this_company' => 1,
         ]);
 
         $company->saveThrowError();
@@ -65,7 +65,7 @@ class DefaultController extends Controller
     private function initDbDivision()
     {
         // Get EAS company info.
-        $company = Company::findOne(['is_eas' => 1]);
+        $company = Company::findOne(['this_company' => 1]);
         if (!$company) {
             throw new Exception("Error finding EAS company.");
         }

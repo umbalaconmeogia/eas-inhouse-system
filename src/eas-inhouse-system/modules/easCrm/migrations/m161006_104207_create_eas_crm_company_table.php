@@ -32,7 +32,7 @@ class m161006_104207_create_eas_crm_company_table extends BaseMigration
             'homepage' => $this->text(),
             'industry' => $this->text(),
             'remarks' => $this->text(),
-            'is_eas' => $this->integer()->defaultValue(0),
+            'this_company' => $this->integer()->defaultValue(0),
         ]);
 
         $this->addComments($this->table, 'Company', [

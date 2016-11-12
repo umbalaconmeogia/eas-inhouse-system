@@ -15,17 +15,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?php echo $form->field($model, 'company_id') ?>
 
     <?php echo $form->field($model, 'division_id') ?>
 
     <?php echo $form->field($model, 'employee_number') ?>
 
-    <?php echo $form->field($model, 'name') ?>
+    <?php echo $form->field($model, 'first_name') ?>
 
-    <?php echo $form->field($model, 'name_kana') ?>
+    <?php echo $form->field($model, 'middle_name') ?>
+
+    <?php echo $form->field($model, 'last_name') ?>
+
+    <?php echo $form->field($model, 'first_name_kana') ?>
+
+    <?php echo $form->field($model, 'last_name_kana') ?>
+
+    <?php echo $form->field($model, 'middle_name_kana') ?>
 
     <?php echo $form->field($model, 'gender') ?>
 
@@ -39,13 +45,21 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($model, 'email') ?>
 
-    <?php echo $form->field($model, 'title') ?>
+    <?php echo $form->field($model, 'job_title') ?>
+
+    <?php echo $form->field($model, 'zip_code') ?>
+
+    <?php echo $form->field($model, 'address1') ?>
+
+    <?php echo $form->field($model, 'address2') ?>
+
+    <?php echo $form->field($model, 'iso_country_code') ?>
 
     <?php echo $form->field($model, 'remarks') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

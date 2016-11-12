@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput() ?>
 
     <?= $form->field($model, 'name_kana')->textInput() ?>
@@ -32,16 +30,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address2')->textInput() ?>
 
+    <?= $form->field($model, 'iso_country_code')->textInput() ?>
+
     <?= $form->field($model, 'homepage')->textInput() ?>
 
     <?= $form->field($model, 'industry')->textInput() ?>
 
     <?= $form->field($model, 'remarks')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'is_eas')->checkbox() ?>
-
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

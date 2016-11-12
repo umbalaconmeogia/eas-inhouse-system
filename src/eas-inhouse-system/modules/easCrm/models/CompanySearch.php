@@ -18,8 +18,8 @@ class CompanySearch extends Company
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'industry', 'remarks'], 'safe'],
-            [['data_status', 'created_at', 'updated_at', 'is_eas'], 'integer'],
+            [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'iso_country_code', 'homepage', 'industry', 'remarks'], 'safe'],
+            [['data_status', 'created_at', 'updated_at', 'this_company'], 'integer'],
         ];
     }
 
@@ -62,7 +62,7 @@ class CompanySearch extends Company
             'data_status' => $this->data_status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'is_eas' => $this->is_eas,
+            'this_company' => $this->this_company,
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
@@ -77,6 +77,7 @@ class CompanySearch extends Company
             ->andFilterWhere(['like', 'zip_code', $this->zip_code])
             ->andFilterWhere(['like', 'address1', $this->address1])
             ->andFilterWhere(['like', 'address2', $this->address2])
+            ->andFilterWhere(['like', 'iso_country_code', $this->iso_country_code])
             ->andFilterWhere(['like', 'homepage', $this->homepage])
             ->andFilterWhere(['like', 'industry', $this->industry])
             ->andFilterWhere(['like', 'remarks', $this->remarks]);

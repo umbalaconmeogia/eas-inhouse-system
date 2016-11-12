@@ -26,7 +26,7 @@ use Yii;
  * @property string $homepage
  * @property string $industry
  * @property string $remarks
- * @property integer $is_eas
+ * @property integer $this_company
  *
  * @property Division[] $divisions
  * @property Employee[] $employees
@@ -49,7 +49,7 @@ class Company extends \batsg\models\BaseBatsgModel
         return [
             [['name'], 'required'],
             [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'iso_country_code', 'homepage', 'industry', 'remarks'], 'string'],
-            [['data_status', 'created_at', 'updated_at', 'is_eas'], 'integer'],
+            [['data_status', 'created_at', 'updated_at', 'this_company'], 'integer'],
         ];
     }
 
@@ -78,7 +78,7 @@ class Company extends \batsg\models\BaseBatsgModel
             'homepage' => Yii::t('app', 'Homepage'),
             'industry' => Yii::t('app', 'Industry'),
             'remarks' => Yii::t('app', 'Remarks'),
-            'is_eas' => Yii::t('app', 'Is Eas'),
+            'this_company' => Yii::t('app', 'This Company'),
         ];
     }
 

@@ -18,7 +18,7 @@ class EmployeeSearch extends Employee
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by', 'company_id', 'division_id', 'employee_number', 'name', 'name_kana', 'tel', 'tel_ext', 'fax', 'mobile', 'email', 'title', 'remarks'], 'safe'],
+            [['id', 'created_by', 'updated_by', 'company_id', 'division_id', 'employee_number', 'first_name', 'middle_name', 'last_name', 'first_name_kana', 'last_name_kana', 'middle_name_kana', 'tel', 'tel_ext', 'fax', 'mobile', 'email', 'job_title', 'zip_code', 'address1', 'address2', 'iso_country_code', 'remarks'], 'safe'],
             [['data_status', 'created_at', 'updated_at', 'gender'], 'integer'],
         ];
     }
@@ -71,14 +71,22 @@ class EmployeeSearch extends Employee
             ->andFilterWhere(['like', 'company_id', $this->company_id])
             ->andFilterWhere(['like', 'division_id', $this->division_id])
             ->andFilterWhere(['like', 'employee_number', $this->employee_number])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'name_kana', $this->name_kana])
+            ->andFilterWhere(['like', 'first_name', $this->first_name])
+            ->andFilterWhere(['like', 'middle_name', $this->middle_name])
+            ->andFilterWhere(['like', 'last_name', $this->last_name])
+            ->andFilterWhere(['like', 'first_name_kana', $this->first_name_kana])
+            ->andFilterWhere(['like', 'last_name_kana', $this->last_name_kana])
+            ->andFilterWhere(['like', 'middle_name_kana', $this->middle_name_kana])
             ->andFilterWhere(['like', 'tel', $this->tel])
             ->andFilterWhere(['like', 'tel_ext', $this->tel_ext])
             ->andFilterWhere(['like', 'fax', $this->fax])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'job_title', $this->job_title])
+            ->andFilterWhere(['like', 'zip_code', $this->zip_code])
+            ->andFilterWhere(['like', 'address1', $this->address1])
+            ->andFilterWhere(['like', 'address2', $this->address2])
+            ->andFilterWhere(['like', 'iso_country_code', $this->iso_country_code])
             ->andFilterWhere(['like', 'remarks', $this->remarks]);
 
         return $dataProvider;
