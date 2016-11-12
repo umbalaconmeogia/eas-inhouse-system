@@ -35,7 +35,7 @@ class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\Identit
     public function rules()
     {
         return [
-            [['id', 'username', 'password_encryption'], 'required'],
+            [['username', 'password_encryption'], 'required'],
             [['id', 'created_by', 'updated_by', 'username', 'password_encryption', 'access_token', 'auth_key'], 'string'],
             [['data_status', 'created_at', 'updated_at', 'must_change_password'], 'integer'],
             [['username'], 'unique'],

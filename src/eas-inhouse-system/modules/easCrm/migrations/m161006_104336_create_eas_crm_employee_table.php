@@ -25,22 +25,30 @@ class m161006_104336_create_eas_crm_employee_table extends BaseMigration
             'company_id' => $this->text()->notNull(),
             'division_id' => $this->text(),
             'employee_number' => $this->text()->unique(),
-            'name' => $this->text()->notNull(),
-            'name_kana' => $this->text(),
+            'first_name' => $this->text()->notNull(),
+            'middle_name' => $this->text()->notNull(),
+            'last_name' => $this->text()->notNull(),
+            'first_name_kana' => $this->text(),
+            'last_name_kana' => $this->text(),
+            'middle_name_kana' => $this->text(),
             'gender' => $this->integer(),
             'tel' => $this->text(),
             'tel_ext' => $this->text(),
             'fax' => $this->text(),
             'mobile' => $this->text(),
             'email' => $this->text(),
-            'title' => $this->text(),
+            'job_title' => $this->text(),
+            'zip_code' => $this->text(),
+            'address1' => $this->text(),
+            'address2' => $this->text(),
+            'iso_country_code' => $this->text(),
             'remarks' => $this->text(),
         ]);
 
         $this->addComments($this->table, 'Employee', [
             'company_id' => 'Company',
             'division_id' => 'Division',
-            'name' => 'Employee name',
+            'iso_country_code' => '2 character Country code',
         ]);
 
         $this->addForeignKeys($this->table, [

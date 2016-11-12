@@ -23,6 +23,7 @@ use Yii;
  * @property string $zip_code
  * @property string $address1
  * @property string $address2
+ * @property string $iso_country_code
  * @property string $homepage
  * @property string $remarks
  *
@@ -46,7 +47,7 @@ class Division extends \batsg\models\BaseBatsgModel
     {
         return [
             [['company_id', 'name'], 'required'],
-            [['id', 'created_by', 'updated_by', 'company_id', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'remarks'], 'string'],
+            [['id', 'created_by', 'updated_by', 'company_id', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'iso_country_code', 'homepage', 'remarks'], 'string'],
             [['data_status', 'created_at', 'updated_at'], 'integer'],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
         ];
@@ -74,6 +75,7 @@ class Division extends \batsg\models\BaseBatsgModel
             'zip_code' => Yii::t('app', 'Zip Code'),
             'address1' => Yii::t('app', 'Address1'),
             'address2' => Yii::t('app', 'Address2'),
+            'iso_country_code' => Yii::t('app', 'Iso Country Code'),
             'homepage' => Yii::t('app', 'Homepage'),
             'remarks' => Yii::t('app', 'Remarks'),
         ];

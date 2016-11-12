@@ -3,6 +3,9 @@
 namespace app\modules\easCrm\controllers;
 
 use yii\web\Controller;
+use app\models\LoginUser;
+use app\modules\easCrm\models\Company;
+use app\modules\easCrm\models\Division;
 
 /**
  * Default controller for the `easCrm` module
@@ -20,11 +23,12 @@ class DefaultController extends Controller
 
     public function actionInitializeData()
     {
-        Yii::$app->db->transaction(function() {
+        \Yii::$app->db->transaction(function() {
             $this->initDbUser();
             $this->initDbCompany();
             $this->initDbDivision();
         });
+        return "Done";
     }
 
     /**

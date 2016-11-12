@@ -28,6 +28,7 @@ class m161006_104207_create_eas_crm_company_table extends BaseMigration
             'zip_code' => $this->text(),
             'address1' => $this->text(),
             'address2' => $this->text(),
+            'iso_country_code' => $this->text(),
             'homepage' => $this->text(),
             'industry' => $this->text(),
             'remarks' => $this->text(),
@@ -35,7 +36,8 @@ class m161006_104207_create_eas_crm_company_table extends BaseMigration
         ]);
 
         $this->addComments($this->table, 'Company', [
-            'name' => 'Customer name',
+            'name' => 'Company name',
+            'iso_country_code' => '2 character Country code',
         ]);
     }
 

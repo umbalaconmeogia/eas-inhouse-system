@@ -16,15 +16,23 @@ use Yii;
  * @property string $company_id
  * @property string $division_id
  * @property string $employee_number
- * @property string $name
- * @property string $name_kana
+ * @property string $first_name
+ * @property string $middle_name
+ * @property string $last_name
+ * @property string $first_name_kana
+ * @property string $last_name_kana
+ * @property string $middle_name_kana
  * @property integer $gender
  * @property string $tel
  * @property string $tel_ext
  * @property string $fax
  * @property string $mobile
  * @property string $email
- * @property string $title
+ * @property string $job_title
+ * @property string $zip_code
+ * @property string $address1
+ * @property string $address2
+ * @property string $iso_country_code
  * @property string $remarks
  *
  * @property Company $company
@@ -46,8 +54,8 @@ class Employee extends \batsg\models\BaseBatsgModel
     public function rules()
     {
         return [
-            [['company_id', 'name'], 'required'],
-            [['id', 'created_by', 'updated_by', 'company_id', 'division_id', 'employee_number', 'name', 'name_kana', 'tel', 'tel_ext', 'fax', 'mobile', 'email', 'title', 'remarks'], 'string'],
+            [['company_id', 'first_name', 'middle_name', 'last_name'], 'required'],
+            [['id', 'created_by', 'updated_by', 'company_id', 'division_id', 'employee_number', 'first_name', 'middle_name', 'last_name', 'first_name_kana', 'last_name_kana', 'middle_name_kana', 'tel', 'tel_ext', 'fax', 'mobile', 'email', 'job_title', 'zip_code', 'address1', 'address2', 'iso_country_code', 'remarks'], 'string'],
             [['data_status', 'created_at', 'updated_at', 'gender'], 'integer'],
             [['employee_number'], 'unique'],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
@@ -70,15 +78,23 @@ class Employee extends \batsg\models\BaseBatsgModel
             'company_id' => Yii::t('app', 'Company ID'),
             'division_id' => Yii::t('app', 'Division ID'),
             'employee_number' => Yii::t('app', 'Employee Number'),
-            'name' => Yii::t('app', 'Name'),
-            'name_kana' => Yii::t('app', 'Name Kana'),
+            'first_name' => Yii::t('app', 'First Name'),
+            'middle_name' => Yii::t('app', 'Middle Name'),
+            'last_name' => Yii::t('app', 'Last Name'),
+            'first_name_kana' => Yii::t('app', 'First Name Kana'),
+            'last_name_kana' => Yii::t('app', 'Last Name Kana'),
+            'middle_name_kana' => Yii::t('app', 'Middle Name Kana'),
             'gender' => Yii::t('app', 'Gender'),
             'tel' => Yii::t('app', 'Tel'),
             'tel_ext' => Yii::t('app', 'Tel Ext'),
             'fax' => Yii::t('app', 'Fax'),
             'mobile' => Yii::t('app', 'Mobile'),
             'email' => Yii::t('app', 'Email'),
-            'title' => Yii::t('app', 'Title'),
+            'job_title' => Yii::t('app', 'Job Title'),
+            'zip_code' => Yii::t('app', 'Zip Code'),
+            'address1' => Yii::t('app', 'Address1'),
+            'address2' => Yii::t('app', 'Address2'),
+            'iso_country_code' => Yii::t('app', 'Iso Country Code'),
             'remarks' => Yii::t('app', 'Remarks'),
         ];
     }

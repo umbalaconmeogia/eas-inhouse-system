@@ -22,6 +22,7 @@ use Yii;
  * @property string $zip_code
  * @property string $address1
  * @property string $address2
+ * @property string $iso_country_code
  * @property string $homepage
  * @property string $industry
  * @property string $remarks
@@ -47,7 +48,7 @@ class Company extends \batsg\models\BaseBatsgModel
     {
         return [
             [['name'], 'required'],
-            [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'homepage', 'industry', 'remarks'], 'string'],
+            [['id', 'created_by', 'updated_by', 'name', 'name_kana', 'name_short', 'tel', 'fax', 'email', 'zip_code', 'address1', 'address2', 'iso_country_code', 'homepage', 'industry', 'remarks'], 'string'],
             [['data_status', 'created_at', 'updated_at', 'is_eas'], 'integer'],
         ];
     }
@@ -73,6 +74,7 @@ class Company extends \batsg\models\BaseBatsgModel
             'zip_code' => Yii::t('app', 'Zip Code'),
             'address1' => Yii::t('app', 'Address1'),
             'address2' => Yii::t('app', 'Address2'),
+            'iso_country_code' => Yii::t('app', 'Iso Country Code'),
             'homepage' => Yii::t('app', 'Homepage'),
             'industry' => Yii::t('app', 'Industry'),
             'remarks' => Yii::t('app', 'Remarks'),
