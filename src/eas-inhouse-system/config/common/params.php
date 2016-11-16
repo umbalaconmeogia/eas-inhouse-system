@@ -5,4 +5,5 @@
 
 return [
     'adminEmail' => 'admin@example.com',
+    'isoCountryCodes' => require(__DIR__ . '/isoCountryCodes.php'),
 ];

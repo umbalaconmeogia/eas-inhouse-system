@@ -18,6 +18,12 @@ class m161004_173216_create_login_user_table extends BaseMigration
      */
     public function safeUp()
     {
+        $this->createDbTabe();
+        $this->initDbUser();
+    }
+
+    private function createDbTabe()
+    {
         // Create table.
         $this->createTableWithExtraFields($this->table, [
             'username' => $this->text()->unique()->notNull(),
@@ -34,6 +40,16 @@ class m161004_173216_create_login_user_table extends BaseMigration
             'auth_key' => 'For cookie-based login',
             'must_change_password' => '1: Must change password when login',
         ]);
+    }
+
+    /**
+     * Create the first user (username: admin, password: admin).
+     */
+    private function initDbUser()
+    {
+        $admin = new LoginUser(['username' => 'admin']);
+        $admin->setPassword('admin');
+        $admin->saveThrowError();
     }
 
     /**

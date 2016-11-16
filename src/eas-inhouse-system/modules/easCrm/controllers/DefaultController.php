@@ -24,23 +24,11 @@ class DefaultController extends Controller
     public function actionInitializeData()
     {
         \Yii::$app->db->transaction(function() {
-            $this->initDbUser();
             $this->initDbCompany();
             $this->initDbDivision();
         });
         return "Done";
     }
-
-    /**
-     * Create the first user (username: admin, password: admin).
-     */
-    private function initDbUser()
-    {
-        $admin = new LoginUser(['username' => 'admin']);
-        $admin->setPassword('admin');
-        $admin->saveThrowError();
-    }
-
 
     private function initDbCompany()
     {
@@ -56,6 +44,7 @@ class DefaultController extends Controller
             'homepage' => 'http://eas.evolable.asia',
             'remarks' => '本店住所は調布市',
             'industry' => 'IT',
+            'iso_country_code' => 'JP',
             'this_company' => 1,
         ]);
 
@@ -78,6 +67,7 @@ class DefaultController extends Controller
             'zip_code' => '105-6219',
             'address1' => '東京都港区愛宕2-5-1',
             'address2' => '愛宕グリーンヒルズMORIタワー19F',
+            'iso_country_code' => 'JP',
             'remarks' => 'エボラブルアジア同オフィス',
         ]))->saveThrowError();
         // Create VN divisions.
@@ -86,9 +76,8 @@ class DefaultController extends Controller
             'name' => 'VN',
             'address1' => '9F Viet A Building, Duy Tan Street',
             'address2' => 'Cau Giay District, Ha Noi, Vietnam',
+            'iso_country_code' => 'VN',
             'remarks' => 'エボラブルアジア　ハノイ　オフィス',
         ]))->saveThrowError();
     }
-
-
 }

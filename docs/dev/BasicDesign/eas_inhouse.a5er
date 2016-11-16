@@ -691,11 +691,11 @@ Left=1150
 Top=100
 Field="ID","id","text","NOT NULL",0,"","",$FFFFFFFF,""
 Field="案件名","name","text","NOT NULL",,"","",$FFFFFFFF,""
-Field="会社","company_id","text",,,"","",$FFFFFFFF,""
+Field="会社","company_id","text","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20161011221319
+ModifiedDateTime=20161011224740
 Position="COMPANY",1150,100
 
 [Entity]

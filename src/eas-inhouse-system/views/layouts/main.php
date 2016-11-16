@@ -39,6 +39,7 @@ AppAsset::register($this);
             ['label' => 'Company', 'url' => ['/easCrm/company/index']],
             ['label' => 'Division', 'url' => ['/easCrm/division/index']],
             ['label' => 'Employee', 'url' => ['/easCrm/employee/index']],
+            ['label' => 'Project', 'url' => ['/easProject/project/index']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
