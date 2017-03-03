@@ -1,0 +1,38 @@
+Yii Migration Tool (based on Yii v2.0.11)
+
+Total 1 new migration to be applied:
+	m161124_081501_create_login_user_table
+
+Apply the above migration? (yes|no) [no]:*** applying m161124_081501_create_login_user_table
+    > create table login_user ... done (time: 0.019s)
+    > add comment on column username ... done (time: 0.001s)
+    > add comment on column password_encryption ... done (time: 0.000s)
+    > add comment on column access_token ... done (time: 0.000s)
+    > add comment on column auth_key ... done (time: 0.000s)
+    > add comment on column must_change_password ... done (time: 0.000s)
+    > add comment on table login_user ... done (time: 0.000s)
+Drop table login_user    > drop table login_user ...Exception: SQLSTATE[25P02]: In failed sql transaction: 7 ERROR:  現在のトランザクションがアボートしました。トランザクションブロックが終わるまでコマンドは無視されます
+The SQL being executed was: DROP TABLE "login_user" (D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\db\Schema.php:636)
+#0 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\db\Command.php(856): yii\db\Schema->convertException(Object(PDOException), 'DROP TABLE "log...')
+#1 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\db\Migration.php(304): yii\db\Command->execute()
+#2 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\umbalaconmeogia\yii2-batsg\src\migrations\BaseMigrationCreateTable.php(50): yii\db\Migration->dropTable('login_user')
+#3 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\umbalaconmeogia\yii2-batsg\src\migrations\BaseMigrationCreateTable.php(30): batsg\migrations\BaseMigrationCreateTable->dropTableThrow(Object(yii\db\Exception))
+#4 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\db\Migration.php(96): batsg\migrations\BaseMigrationCreateTable->safeUp()
+#5 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(654): yii\db\Migration->up()
+#6 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(166): yii\console\controllers\BaseMigrateController->migrateUp('m161124_081501_...')
+#7 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#8 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\base\Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#10 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\console\Controller.php(128): yii\base\Controller->runAction('', Array)
+#11 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\base\Module.php(523): yii\console\Controller->runAction('', Array)
+#12 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#13 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#14 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\vendor\yiisoft\yii2\base\Application.php(380): yii\console\Application->handleRequest(Object(yii\console\Request))
+#15 D:\data\projects.it\eas-inhouse-system\src\eas-inhouse-system\yii(20): yii\base\Application->run()
+#16 {main}
+*** failed to apply m161124_081501_create_login_user_table (time: 0.645s)
+
+
+0 from 1 migrations were applied.
+
+Migration failed. The rest of the migrations are canceled.
