@@ -19,6 +19,7 @@ use batsg\helpers\HDateTime;
  *
  * @property ExpensesSettlementItem[] $expensesSettlementItems
  * @property LoginUser $user
+ * @property ExpensesSettlementTransport[] $expensesSettlementTransports
  *
  * @property string $yearMonth
  */
@@ -76,6 +77,14 @@ class ExpensesSettlementMonth extends \batsg\models\BaseBatsgModel
     public function getUser()
     {
         return $this->hasOne(LoginUser::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExpensesSettlementTransports()
+    {
+        return $this->hasMany(ExpensesSettlementTransport::className(), ['expenses_settlement_month_id' => 'id']);
     }
 
     /**

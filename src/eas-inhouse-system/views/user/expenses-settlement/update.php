@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <?php $form = ActiveForm::begin(['action' => ['create-item']]); ?>
 
     <?= HHtml::hiddenInput($expensesSettlementItem, 'expenses_settlement_month_id') ?>
-    <?= $form->field($expensesSettlementItem, 'expense_date')->textInput() ?>
+    <?= $form->field($expensesSettlementItem, 'expense_date')->textInput(['type' => 'date']) ?>
     <?= $form->field($expensesSettlementItem, 'amount')->textInput() ?>
     <?= $form->field($expensesSettlementItem, 'payee')->textInput() ?>
     <?= $form->field($expensesSettlementItem, 'payment_content')->textInput() ?>

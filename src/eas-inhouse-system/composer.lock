@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "206a0c3f98f2c8cf1f3bc1a7112c9f1f",
-    "content-hash": "6ca8f98407b7ef7adfa572c8c071281d",
+    "hash": "23c706d5bb4e67f1c09b3026c59b22f1",
+    "content-hash": "a654cfe73baf47eaef1afb9d222f2cbe",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -362,16 +362,16 @@
         },
         {
             "name": "umbalaconmeogia/yii2-batsg",
-            "version": "v0.1.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/umbalaconmeogia/yii2-batsg.git",
-                "reference": "5c67843395c0ac2c88809ee1778aec5dfc002546"
+                "reference": "9928d004bd284e6e38c5a5a30868b4704c1db5f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/umbalaconmeogia/yii2-batsg/zipball/5c67843395c0ac2c88809ee1778aec5dfc002546",
-                "reference": "5c67843395c0ac2c88809ee1778aec5dfc002546",
+                "url": "https://api.github.com/repos/umbalaconmeogia/yii2-batsg/zipball/9928d004bd284e6e38c5a5a30868b4704c1db5f8",
+                "reference": "9928d004bd284e6e38c5a5a30868b4704c1db5f8",
                 "shasum": ""
             },
             "type": "library",
@@ -395,7 +395,7 @@
                 "utility",
                 "yii2"
             ],
-            "time": "2017-03-04 02:31:05"
+            "time": "2017-03-04 07:49:33"
         },
         {
             "name": "yiisoft/yii2",
