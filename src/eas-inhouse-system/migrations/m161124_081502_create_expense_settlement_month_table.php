@@ -3,11 +3,11 @@
 use batsg\migrations\BaseMigrationCreateTable;
 
 /**
- * Handles the creation of table `expense_month`.
+ * Handles the creation of table `expense_settlement_month`.
  */
-class m161124_081502_create_expense_month_table extends BaseMigrationCreateTable
+class m161124_081502_create_expense_settlement_month_table extends BaseMigrationCreateTable
 {
-    protected $table = 'expense_month';
+    protected $table = 'expense_settlement_month';
 
     /**
      * {@inheritDoc}

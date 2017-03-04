@@ -3,11 +3,11 @@
 use batsg\migrations\BaseMigrationCreateTable;
 
 /**
- * Handles the creation of table `expense_item`.
+ * Handles the creation of table `expense_settlement_item`.
  */
-class m161124_081503_create_expense_item_table extends BaseMigrationCreateTable
+class m161124_081503_create_expense_settlement_item_table extends BaseMigrationCreateTable
 {
-    protected $table = 'expense_item';
+    protected $table = 'expense_settlement_item';
 
     /**
      * {@inheritDoc}
@@ -17,7 +17,7 @@ class m161124_081503_create_expense_item_table extends BaseMigrationCreateTable
     {
         $this->createTableWithExtraFields($this->table, [
             'id' => $this->primaryKey(),
-            'expense_month_id' => [$this->integer()->notNull(), '経費申請月'],
+            'expense_settlement_month_id' => [$this->integer()->notNull(), '経費申請月'],
             'date' => [$this->date()->notNull(), '日付'],
             'amount' => [$this->integer()->notNull(), '金額'],
             'store' => [$this->string()->notNull(), '店舗'],
@@ -26,6 +26,6 @@ class m161124_081503_create_expense_item_table extends BaseMigrationCreateTable
         ]);
 
         $this->addComments($this->table, '経費申請項目');
-        $this->addForeignKeys($this->table, 'expense_month_id', 'expense_month', 'id');
+        $this->addForeignKeys($this->table, 'expense_settlement_month_id', 'expense_settlement_month', 'id');
     }
 }
