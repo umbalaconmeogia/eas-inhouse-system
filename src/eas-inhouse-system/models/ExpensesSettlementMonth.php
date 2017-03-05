@@ -22,6 +22,7 @@ use batsg\helpers\HDateTime;
  * @property ExpensesSettlementTransport[] $expensesSettlementTransports
  *
  * @property string $yearMonth
+ * @property string $valueForInputTypeMonth
  */
 class ExpensesSettlementMonth extends \batsg\models\BaseBatsgModel
 {
@@ -94,5 +95,14 @@ class ExpensesSettlementMonth extends \batsg\models\BaseBatsgModel
     public function getYearMonth()
     {
         return HDateTime::createFromString($this->month)->toString('Y年m月');
+    }
+
+    /**
+     * Get month in type of yyyy-mm that is set as "value" attribute of <input type="month">.
+     * @return string
+     */
+    public function getValueForInputTypeMonth()
+    {
+        return HDateTime::createFromString($this->month)->toString('Y-m');
     }
 }

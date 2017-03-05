@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'month' => [
+                'attribute' => 'month',
                 'value' => 'yearMonth',
             ],
 

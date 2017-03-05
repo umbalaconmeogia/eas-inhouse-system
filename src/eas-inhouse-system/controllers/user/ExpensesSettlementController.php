@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\ExpensesSettlementItem;
+use batsg\helpers\HDateTime;
 
 /**
  * ExpensesSettlementController implements the CRUD actions for ExpensesSettlementMonth model.
@@ -67,7 +68,14 @@ class ExpensesSettlementController extends Controller
         $model = new ExpensesSettlementMonth();
         $model->user_id = \Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $submitted = $model->load(Yii::$app->request->post());
+        if (!$submitted) {
+            $model->month = HDateTime::now()->toString(HDateTime::FORMAT_DATE);
+        } else {
+            $this->monthToDate($model);
+        }
+
+        if ($submitted && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -140,6 +148,17 @@ class ExpensesSettlementController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Convert month to date (which day is set to 1) if it is not formed as date.
+     * @param ExpensesSettlementMonth $esMonth
+     */
+    private function monthToDate(ExpensesSettlementMonth $esMonth)
+    {
+        if (substr_count($esMonth->month, '-') < 2) {
+            $esMonth->month .= '-01';
         }
     }
 }
