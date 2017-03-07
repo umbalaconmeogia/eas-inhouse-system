@@ -93,7 +93,5 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="form-group">
         <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
