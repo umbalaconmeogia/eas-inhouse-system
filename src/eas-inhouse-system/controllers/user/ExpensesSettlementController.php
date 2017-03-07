@@ -1,36 +1,22 @@
 <?php
 
 namespace app\controllers\user;
+use app\controllers\BaseUserController;
 use app\models;
-use Yii;
+use app\models\ExpensesSettlementItem;
 use app\models\ExpensesSettlementMonth;
 use app\models\ExpensesSettlementMonthSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use app\models\ExpensesSettlementItem;
 use app\models\ExpensesSettlementTransport;
 use batsg\helpers\HDateTime;
+use Yii;
+use yii\db\ActiveRecord;
+use yii\web\NotFoundHttpException;
 
 /**
  * ExpensesSettlementController implements the CRUD actions for ExpensesSettlementMonth model.
  */
-class ExpensesSettlementController extends Controller
+class ExpensesSettlementController extends BaseUserController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all ExpensesSettlementMonth models.
@@ -93,56 +79,102 @@ class ExpensesSettlementController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $esMonth = $this->findModel($id);
 
-        $expensesSettlementItem = new ExpensesSettlementItem();
-        $expensesSettlementItem->load(Yii::$app->request->post());
-        $expensesSettlementItem->expenses_settlement_month_id = $model->id;
-        
-//         transport section
-
-        $expensesSettlementTransport = new ExpensesSettlementTransport();
-        $expensesSettlementTransport->load(Yii::$app->request->post());
-        $expensesSettlementTransport->expenses_settlement_month_id = $model->id;
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($esMonth->load(Yii::$app->request->post()) && $esMonth->save()) {
+            return $this->redirect(['view', 'id' => $esMonth->id]);
         } else {
-            return $this->render('update', [
-                'expensesSettlementMonth' => $model,
-                'expensesSettlementItem' => $expensesSettlementItem,
-                'expensesSettlementTransport' =>   $expensesSettlementTransport,
-            ]);
+            $esItem = $this->loadExpensesSettlementElement(ExpensesSettlementItem::className(), $esMonth);
+            $esTransport = $this->loadExpensesSettlementElement(ExpensesSettlementTransport::className(), $esMonth);
+
+            return $this->renderUpdate($esMonth, $esItem, $esTransport);
         }
     }
 
     public function actionCreateItem()
     {
-        $expensesSettlementItem = new ExpensesSettlementItem();
+        $esItem = new ExpensesSettlementItem();
 
-        if ($expensesSettlementItem->load(Yii::$app->request->post()) && $expensesSettlementItem->save()) {
-            return $this->redirect(['update', 'id' => $expensesSettlementItem->expenses_settlement_month_id]);
+        if ($esItem->load(Yii::$app->request->post()) && $esItem->save()) {
+            return $this->redirect(['update', 'id' => $esItem->expenses_settlement_month_id]);
         } else {
-            return $this->render('update', [
-                'expensesSettlementMonth' => $expensesSettlementItem->expensesSettlementMonth,
-                'expensesSettlementItem' => $expensesSettlementItem,
-            ]);
+            $esMonth = $esItem->expensesSettlementMonth;
+            $esTransport = $this->loadExpensesSettlementElement(ExpensesSettlementTransport::className(), $esMonth);
+
+            return $this->renderUpdate($esMonth, $esItem, $esTransport);
         }
     }
-    
+
     public function actionCreateTransport()
     {
-        $expensesSettlementTransport = new ExpensesSettlementTransport();
-    
-        if ($expensesSettlementTransport->load(Yii::$app->request->post()) && $expensesSettlementTransport->save()) {
-            return $this->redirect(['update', 'id' => $expensesSettlementTransport->expenses_settlement_month_id]);
+        $esTransport = new ExpensesSettlementTransport();
+
+        if ($esTransport->load(Yii::$app->request->post()) && $esTransport->save()) {
+            return $this->redirect(['update', 'id' => $esTransport->expenses_settlement_month_id]);
         } else {
-            return $this->render('update', [
-                'expensesSettlementMonth' => $expensesSettlementTransport->expensesSettlementMonth,
-                'expensesSettlementTransport' => $expensesSettlementTransport,
-            ]);
+            $esMonth = $esTransport->expensesSettlementMonth;
+            $esItem = $this->loadExpensesSettlementElement(ExpensesSettlementItem::className(), $esMonth);
+
+            return $this->renderUpdate($esMonth, $esItem, $esTransport);
         }
     }
+
+    /**
+     * @param ExpensesSettlementMonth $esMonth
+     * @param ExpensesSettlementItem $esItem
+     * @param ExpensesSettlementTransport $esTransport
+     */
+    private function renderUpdate(ExpensesSettlementMonth $esMonth,
+        ExpensesSettlementItem $esItem,
+        ExpensesSettlementTransport $esTransport)
+    {
+        return $this->render('update', [
+            'expensesSettlementMonth' => $esMonth,
+            'expensesSettlementItem' => $esItem,
+            'expensesSettlementTransport' =>   $esTransport,
+        ]);
+    }
+
+    /**
+     *
+     * @param string $elementClassName ExpensesSettlementItem or ExpensesSettlementTransport
+     * @param ExpensesSettlementMonth $esMonth
+     * @return ActiveRecord
+     */
+    private function loadExpensesSettlementElement($elementClassName, ExpensesSettlementMonth $esMonth)
+    {
+        $result = new $elementClassName;
+        $result->load(Yii::$app->request->post());
+        $result->expenses_settlement_month_id = $esMonth->id;
+
+        return $result;
+    }
+
+    //     /**
+    //      * @param ExpensesSettlementMonth $esMonth
+    //      * @return \app\models\ExpensesSettlementItem
+    //      */
+    //     private function loadExpensesSettlementItem(ExpensesSettlementMonth $esMonth)
+    //     {
+    //         $esItem = new ExpensesSettlementItem();
+    //         $esItem->load(Yii::$app->request->post());
+    //         $esItem->expenses_settlement_month_id = $esMonth->id;
+
+    //         return $esItem;
+    //     }
+
+    //     /**
+    //      * @param ExpensesSettlementMonth $esMonth
+    //      * @return \app\models\ExpensesSettlementTransport
+    //      */
+    //     private function loadExpensesSettlementTransport(ExpensesSettlementMonth $esMonth)
+    //     {
+    //         $esTransport = new ExpensesSettlementTransport();
+    //         $esTransport->load(Yii::$app->request->post());
+    //         $esTransport->expenses_settlement_month_id = $esMonth->id;
+
+    //         return $esTransport;
+    //     }
 
     /**
      * Deletes an existing ExpensesSettlementMonth model.
