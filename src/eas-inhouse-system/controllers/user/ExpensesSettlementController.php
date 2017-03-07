@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers\user;
-
+use app\models;
 use Yii;
 use app\models\ExpensesSettlementMonth;
 use app\models\ExpensesSettlementMonthSearch;
@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\ExpensesSettlementItem;
+use app\models\ExpensesSettlementTransport;
 use batsg\helpers\HDateTime;
 
 /**
@@ -97,13 +98,20 @@ class ExpensesSettlementController extends Controller
         $expensesSettlementItem = new ExpensesSettlementItem();
         $expensesSettlementItem->load(Yii::$app->request->post());
         $expensesSettlementItem->expenses_settlement_month_id = $model->id;
+        
+//         transport section
 
+        $expensesSettlementTransport = new ExpensesSettlementTransport();
+        $expensesSettlementTransport->load(Yii::$app->request->post());
+        $expensesSettlementTransport->expenses_settlement_month_id = $model->id;
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'expensesSettlementMonth' => $model,
                 'expensesSettlementItem' => $expensesSettlementItem,
+                'expensesSettlementTransport' =>   $expensesSettlementTransport,
             ]);
         }
     }
@@ -118,6 +126,20 @@ class ExpensesSettlementController extends Controller
             return $this->render('update', [
                 'expensesSettlementMonth' => $expensesSettlementItem->expensesSettlementMonth,
                 'expensesSettlementItem' => $expensesSettlementItem,
+            ]);
+        }
+    }
+    
+    public function actionCreateTransport()
+    {
+        $expensesSettlementTransport = new ExpensesSettlementTransport();
+    
+        if ($expensesSettlementTransport->load(Yii::$app->request->post()) && $expensesSettlementTransport->save()) {
+            return $this->redirect(['update', 'id' => $expensesSettlementTransport->expenses_settlement_month_id]);
+        } else {
+            return $this->render('update', [
+                'expensesSettlementMonth' => $expensesSettlementTransport->expensesSettlementMonth,
+                'expensesSettlementTransport' => $expensesSettlementTransport,
             ]);
         }
     }
