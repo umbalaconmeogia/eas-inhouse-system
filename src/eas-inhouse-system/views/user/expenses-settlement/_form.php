@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="expenses-settlement-month-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['enableClientValidation'=> FALSE]); ?>
 
     <?= $form->field($model, 'month')->textInput(['type' => 'month', 'value' => $model->valueForInputTypeMonth]) ?>
 

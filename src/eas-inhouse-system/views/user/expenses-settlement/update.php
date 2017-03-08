@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $expensesSettlementMonth app\models\ExpensesSettlementMonth */
 /* @var $expensesSettlementItem app\models\ExpensesSettlementItem */
+/* @var $expensesSettlementTransport app\models\ExpensesSettlementTransport */
 
 $this->title = 'Update Expenses Settlement Month: ' . $expensesSettlementMonth->yearMonth;
 $this->params['breadcrumbs'][] = ['label' => 'Expenses Settlement Months', 'url' => ['index']];
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <h2>経費</h2>
     <table class="table bordered-table">
         <tr>
             <th>番号</th>
@@ -38,23 +40,13 @@ $this->params['breadcrumbs'][] = 'Update';
         <?php } ?>
     </table>
 
-    <?php $form = ActiveForm::begin(['action' => ['create-item']]); ?>
+    <p>
+    <?= $this->render('_createItemForm', ['expensesSettlementItem' => $expensesSettlementItem]); ?>
+    </p>
 
-    <?= HHtml::hiddenInput($expensesSettlementItem, 'expenses_settlement_month_id') ?>
-    <?= $form->field($expensesSettlementItem, 'expense_date')->textInput(['type' => 'date']) ?>
-    <?= $form->field($expensesSettlementItem, 'amount')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'payee')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'payment_content')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'remarks')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-    
 <!--     create transport -->
-	
+
+    <h2>交通費</h2>
 	<table class="table bordered-table">
         <tr>
             <th>番号</th>
@@ -79,19 +71,8 @@ $this->params['breadcrumbs'][] = 'Update';
             </tr>
         <?php } ?>
     </table>
-	<?php $form = ActiveForm::begin(['action' => ['create-transport']]); ?>
 
-    <?= HHtml::hiddenInput($expensesSettlementTransport, 'expenses_settlement_month_id') ?>
-    <?= $form->field($expensesSettlementTransport, 'expense_date')->textInput(['type' => 'date']) ?>
-    <?= $form->field($expensesSettlementTransport, 'amount')->textInput() ?>
-    <?= $form->field($expensesSettlementTransport, 'transportation')->textInput() ?>
-    <?= $form->field($expensesSettlementTransport, 'section_from')->textInput() ?>
-    <?= $form->field($expensesSettlementTransport, 'section_to')->textInput() ?>
-    <?= $form->field($expensesSettlementTransport, 'type')->textInput() ?>
-    <?= $form->field($expensesSettlementTransport, 'remarks')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
-    </div>
-    <?php ActiveForm::end(); ?>
+    <p>
+    <?= $this->render('_createTransportForm', ['expensesSettlementTransport' => $expensesSettlementTransport]); ?>
+    </p>
 </div>

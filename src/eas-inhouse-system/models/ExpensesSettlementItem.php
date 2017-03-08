@@ -39,7 +39,7 @@ class ExpensesSettlementItem extends \batsg\models\BaseBatsgModel
     {
         return [
             [['data_status', 'created_by', 'created_at', 'updated_by', 'updated_at', 'expenses_settlement_month_id', 'amount'], 'integer'],
-            [['expenses_settlement_month_id', 'expense_date', 'amount', 'payee', 'payment_content', 'remarks'], 'required'],
+            [['expenses_settlement_month_id', 'expense_date', 'amount', 'payee', 'payment_content'], 'required'],
             [['expense_date'], 'safe'],
             [['payee', 'payment_content', 'remarks'], 'string', 'max' => 255],
             [['expenses_settlement_month_id'], 'exist', 'skipOnError' => true, 'targetClass' => ExpensesSettlementMonth::className(), 'targetAttribute' => ['expenses_settlement_month_id' => 'id']],
