@@ -44,6 +44,7 @@ class ExpensesSettlementMonth extends \batsg\models\BaseBatsgModel
             [['month', 'user_id'], 'required'],
             [['month'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => LoginUser::className(), 'targetAttribute' => ['user_id' => 'id']],
+            ['month', 'unique', 'targetAttribute' => ['user_id', 'month'], 'message' => 'この月は既に登録されています'],
         ];
     }
 

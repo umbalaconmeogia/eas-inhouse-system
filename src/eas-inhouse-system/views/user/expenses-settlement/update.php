@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $expensesSettlementMonth app\models\ExpensesSettlementMonth */
 /* @var $expensesSettlementItem app\models\ExpensesSettlementItem */
+/* @var $expensesSettlementTransport app\models\ExpensesSettlementTransport */
 
 $this->title = 'Update Expenses Settlement Month: ' . $expensesSettlementMonth->yearMonth;
 $this->params['breadcrumbs'][] = ['label' => 'Expenses Settlement Months', 'url' => ['index']];
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <h2>経費</h2>
     <table class="table bordered-table">
         <tr>
             <th>番号</th>
@@ -38,19 +40,39 @@ $this->params['breadcrumbs'][] = 'Update';
         <?php } ?>
     </table>
 
-    <?php $form = ActiveForm::begin(['action' => ['create-item']]); ?>
+    <p>
+    <?= $this->render('_createItemForm', ['expensesSettlementItem' => $expensesSettlementItem]); ?>
+    </p>
 
-    <?= HHtml::hiddenInput($expensesSettlementItem, 'expenses_settlement_month_id') ?>
-    <?= $form->field($expensesSettlementItem, 'expense_date')->textInput(['type' => 'date']) ?>
-    <?= $form->field($expensesSettlementItem, 'amount')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'payee')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'payment_content')->textInput() ?>
-    <?= $form->field($expensesSettlementItem, 'remarks')->textInput() ?>
+<!--     create transport -->
 
-    <div class="form-group">
-        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
-    </div>
+    <h2>交通費</h2>
+	<table class="table bordered-table">
+        <tr>
+            <th>番号</th>
+            <th>日付</th>
+            <th>金額</th>
+            <th>交通</th>
+            <th>出発</th>
+            <th>到着</th>
+            <th>片/往</th>
+            <th>備考</th>
+        </tr>
+        <?php foreach ($expensesSettlementMonth->expensesSettlementTransports as $t => $transport) { ?>
+            <tr>
+                <td><?= $t + 1 ?></td>
+                <td><?= $transport->expense_date ?></td>
+                <td><?= $transport->amount ?></td>
+                <td><?= $transport->transportation ?></td>
+                <td><?= $transport->section_from ?></td>
+                <td><?= $transport->section_to ?></td>
+                <td><?= $transport->type ?></td>
+                <td><?= $transport->remarks ?></td>
+            </tr>
+        <?php } ?>
+    </table>
 
-    <?php ActiveForm::end(); ?>
-
+    <p>
+    <?= $this->render('_createTransportForm', ['expensesSettlementTransport' => $expensesSettlementTransport]); ?>
+    </p>
 </div>
