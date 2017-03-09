@@ -64,4 +64,26 @@ class LoginUser extends \batsg\models\BaseBatsgModel implements \yii\web\Identit
             'must_change_password' => 'パスワード要変更',
         ];
     }
+     public function setPassword($password)
+    {
+        $this->password_encryption = Yii::$app->security->generatePasswordHash($password);
+    }
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+    }
 }

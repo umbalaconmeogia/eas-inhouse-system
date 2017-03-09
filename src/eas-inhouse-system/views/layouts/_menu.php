@@ -16,6 +16,7 @@ $items = [
 //     ['label' => 'Contact', 'url' => ['/site/contact']],
 ];
 if (Yii::$app->user->isGuest) {
+    $items[] = ['label' => 'Signup', 'url' => ['/site/signup']];
     $items[] = ['label' => 'Login', 'url' => ['/site/login']];
 } else {
     $items[] = ['label' => '経費申請', 'url' => ['/user/expenses-settlement/index']];
